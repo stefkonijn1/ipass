@@ -40,6 +40,7 @@ public class Codes {
             throw e;
         } finally {
             close();
+            connect.close();
         }
 
     }
