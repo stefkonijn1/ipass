@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="ipass.css">
+
+ <title>Uitslagen Doorgeven</title>
+ <body>
+   <p><img src="vep1.jpg" alt="vep1" width="700" height="100"></p>
+ 
+  <ul>
+  <li><a class="active" href="http://localhost:1555/test/home_club.html">Home</a></li>
+  <li><a href="http://localhost:1555/test/stand_club.html">Stand</a></li>
+  <li><a href="http://localhost:1555/test/prog_club.html">Programmma</a></li>
+    <li><a href="http://localhost:1555/test/uitslag_club.html">Uitslag doorgeven</a></li>
+</ul>
+ <h1>Uitslagen Doorgeven</h1>
+  <div class="box">
+<form action="UitslagenClub.java" method="get">
+ 
+Thuisteam:<br>
+  <input type="text" name="thuis">
+  <br>
+  Ronde:<br>
+  <input type="text" name="ronde">
+  <br>
+  Doelpunten Thuis:<br>
+  <input type="text" name="dpthuis">
+  <br>
+  Doelpunten Uit:<br>
+  <input type="text" name="dpuit">
+  <br><br>
+          <input type="submit" value="Bekijk" />
+  </form>
+  
+<form class="ann", action="http://localhost:1555/test/home_club.html">
+    <input type="submit" value="Annuleren" />
+</form>
+ </body>
+</html>

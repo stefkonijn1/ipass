@@ -1,0 +1,184 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    text-align: center;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+H1 { text-align: center }
+body { text-align: center ;
+}
+
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+}
+.center {
+    width:600px;
+    height:100px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-50px;  /* half of height */
+    top:65%;
+    left:50%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.box {
+	    width:600px;
+    height:100px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-50px;  /* half of height */
+    top:50%;
+    left:50%;
+}
+.box2 {
+	    width:600px;
+    height:100px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-50px;  /* half of height */
+    top:60%;
+    left:68%;
+}
+.box3 {
+	    width:600px;
+    height:100px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-50px;  /* half of height */
+    top:60%;
+    left:50%;
+}
+.ann {
+		    width:100px;
+    height:30px;
+    position:fixed;
+    margin-left:-50px; /* half of width */
+    margin-top:-15px;  /* half of height */
+    top:90%;
+    left:90%;
+}
+table#table1 { 
+	    width:600px;
+    height:50px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-25px;  /* half of height */
+    top:70%;
+    left:50%;
+    text-align: center;
+    border-collapse: collapse;
+}
+table#table2 { 
+	    width:400px;
+    height:50px;
+    position:fixed;
+    margin-left:-200px; /* half of width */
+    margin-top:-25px;  /* half of height */
+    top:65%;
+    left:50%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.form1 {
+		    width:600px;
+    height:100px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-50px;  /* half of height */
+    top:80%;
+    left:50%;
+}
+.form2 {
+		    width:600px;
+    height:100px;
+    position:fixed;
+    margin-left:-300px; /* half of width */
+    margin-top:-50px;  /* half of height */
+    top:50%;
+    left:50%;
+}
+a.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
+
+/* Popup container */
+.popup {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+/* The actual popup (appears on top) */
+.popup .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 30px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+.popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+ 

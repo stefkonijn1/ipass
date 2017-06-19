@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="ipass.css">
+
+ <title>Uitslagen Doorgeven</title>
+ <body>
+   <p><img src="vep1.jpg" alt="vep1" width="700" height="100"></p>
+ 
+  <ul>
+  <li><a class="active" href="http://localhost:1555/test/inlog.html">Home</a></li>
+  <li><a href="http://localhost:1555/test/stand.html">Stand</a></li>
+  <li><a href="http://localhost:1555/test/prog.html">Programmma</a></li>
+  <li><a href="http://localhost:1555/test/uitslag.html">Uitsag doorgeven</a></li>
+  <li><a href="http://localhost:1555/test/team1.html">Team toevoegen</a></li>
+  <li><a href="http://localhost:1555/test/team2.html">Team Verwijderen</a></li>
+  <li><a href="http://localhost:1555/test/lid1.html">Lid toevoegen</a></li>
+  <li><a href="http://localhost:1555/test/lid2.html">Lid Verwijderen</a></li>
+</ul>
+ <h1>Uitslagen Doorgeven</h1>
+  <div class="box">
+<form action="Uitslagen.java" method="get">
+ 
+Thuisteam:<br>
+  <input type="text" name="thuis">
+  <br>
+  Ronde:<br>
+  <input type="text" name="ronde">
+  <br>
+  Doelpunten Thuis:<br>
+  <input type="text" name="dpthuis">
+  <br>
+  Doelpunten Uit:<br>
+  <input type="text" name="dpuit">
+  <br><br>
+          <input type="submit" value="Bekijk" />
+  </form>
+  
+
+<div class="ann">
+<form action="http://localhost:1555/test/inlog.html">
+    <input type="submit" value="Annuleren" />
+</form>
+</div>
+ </body>
+</html>
