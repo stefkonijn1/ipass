@@ -52,11 +52,11 @@ public class Lid extends HttpServlet {
 	 out.println(" <ul>");
 	 out.println(" <li><a class='active' href='home_lid.html'>Home</a></li>");
 	 out.println("  <li><a href='stand_lid.html'>Stand</a></li>");
-	 out.println("  <li><a href='http://localhost:1555/test/prog_lid.html'>Programmma</a></li>");
+	 out.println("  <li><a href='prog_lid.html'>Programmma</a></li>");
 
 	 out.println("</ul>");
 	 out.println("<h1>Wel gelukt!</h1>");
-	 out.println("<form class='ann', action='http://localhost:1555/test/home_lid.html'>");
+	 out.println("<form class='ann', action='home_lid.html'>");
 	 out.println("    <input type='submit' value='Ga terug' />");
 
 
@@ -75,12 +75,12 @@ public class Lid extends HttpServlet {
 
 			 out.println(" <p><img src='vep1.jpg' alt='vep1' width='700' height='100'></p>");
 			 out.println(" <ul>");
-			 out.println(" <li><a class='active' href='http://localhost:1555/test/index.html'>Home</a></li>");
+			 out.println(" <li><a class='active' href='index.html'>Home</a></li>");
 
 
 			 out.println("</ul>");
 			 out.println("<h1>Niet gelukt!</h1>");
-			 out.println("<form class='ann', action='http://localhost:1555/test/index.html'>");
+			 out.println("<form class='ann', action='index.html'>");
 			 out.println("    <input type='submit' value='Ga terug' />");
 
 

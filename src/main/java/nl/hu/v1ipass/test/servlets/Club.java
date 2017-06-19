@@ -45,14 +45,14 @@ public class Club extends HttpServlet {
 	 out.println(" <body>");
 	 out.println(" <p><img src='vep1.jpg' alt='vep1' width='700' height='100'></p>");
 	 out.println(" <ul>");
-	 out.println(" <li><a class='active' href='http://localhost:1555/test/home_club.html'>Home</a></li>");
-	 out.println("  <li><a href='http://localhost:1555/test/stand_club.html'>Stand</a></li>");
-	 out.println("  <li><a href='http://localhost:1555/test/prog_club.html'>Programmma</a></li>");
-	 out.println("  <li><a href='http://localhost:1555/test/uitslag_club.html'>Uitslag doorgeven</a></li>");
+	 out.println(" <li><a class='active' href='home_club.html'>Home</a></li>");
+	 out.println("  <li><a href='stand_club.html'>Stand</a></li>");
+	 out.println("  <li><a href='prog_club.html'>Programmma</a></li>");
+	 out.println("  <li><a href='uitslag_club.html'>Uitslag doorgeven</a></li>");
 
 	 out.println("</ul>");
 	 out.println("<h1>Wel gelukt!</h1>");
-	 out.println("<form class='ann', action='http://localhost:1555/test/home_club.html'>");
+	 out.println("<form class='ann', action='home_club.html'>");
 	 out.println("    <input type='submit' value='Ga terug' />");
 
 
@@ -71,12 +71,12 @@ public class Club extends HttpServlet {
 
 			 out.println(" <p><img src='vep1.jpg' alt='vep1' width='700' height='100'></p>");
 			 out.println(" <ul>");
-			 out.println(" <li><a class='active' href='http://localhost:1555/test/index.html'>Home</a></li>");
+			 out.println(" <li><a class='active' href='index.html'>Home</a></li>");
 
 
 			 out.println("</ul>");
 			 out.println("<h1>Niet gelukt!</h1>");
-			 out.println("<form class='ann', action='http://localhost:1555/test/index.html'>");
+			 out.println("<form class='ann', action='index.html'>");
 			 out.println("    <input type='submit' value='Ga terug' />");
 
 
