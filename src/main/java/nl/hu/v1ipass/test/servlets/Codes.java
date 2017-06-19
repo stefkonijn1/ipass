@@ -17,19 +17,20 @@ public class Codes {
     private ResultSet resultSet = null;
 
 
-    public void AddTeam(String naam, String klasse) throws Exception {
+    public void AddTeam(String naam, int klasse) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
             
             
 
             // Statements allow to issue SQL queries to the database
           preparedStatement = connect.prepareStatement("INSERT INTO TEAMS(teamnaam, klasse, gespeelde_wedstrijden,gewonnen,gelijk,verloren,punten, doelpunten_v, doelpunten_t, club_id) VALUES(?, ?, 0,0,0,0,0,0,0, 1)");
         preparedStatement.setString(1, naam);
-        preparedStatement.setString(2, klasse);
+        preparedStatement.setInt(2, klasse);
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
@@ -45,9 +46,10 @@ public class Codes {
     public void DeleteTeam(int id) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
             
             
 
@@ -66,21 +68,24 @@ public class Codes {
         }
 
     }
-    public void AddLid(String naam, String Achternaam, String leeftijd, int teamcode) throws Exception {
+    public void AddLid(String naam, String Achternaam, int leeftijd, int teamcode, String pasw) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
             
             
 
             // Statements allow to issue SQL queries to the database
-          preparedStatement = connect.prepareStatement("INSERT INTO Leden(Naam, Achternaam, Gbdatum, teamcode) VALUES(?, ?, ?, ?)");
+          preparedStatement = connect.prepareStatement("INSERT INTO Leden(Naam, Achternaam, Leeftijd, teamcode, password) VALUES(?, ?, ?, ?, ?)");
         preparedStatement.setString(1, naam);
         preparedStatement.setString(2, Achternaam);
-        preparedStatement.setString(3, leeftijd);
+        preparedStatement.setInt(3, leeftijd);
         preparedStatement.setInt(4, teamcode);
+        preparedStatement.setString(5, pasw);
+
 
 
 
@@ -98,9 +103,10 @@ public class Codes {
     public void DeleteLid(int id) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
             
             
 
@@ -123,9 +129,10 @@ public class Codes {
     public void UitslagDoorgevenProg(int thuis, int ronde, int dpthuis, int dpuit) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
             
             
 
@@ -151,10 +158,12 @@ public class Codes {
     public void UitslagDoorgevenTeamsThuis(int thuis, int ronde, int dpthuis, int dpuit) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-            int winnaar = 0;
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
+        	int winnaar = 0;
             if (dpthuis>dpuit){
             	winnaar = 1;
             }
@@ -224,9 +233,11 @@ if (winnaar == 1){
     public void UitslagDoorgevenTeamsUit(int thuis, int ronde, int dpthuis, int dpuit) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             int winnaar = 0;
             if (dpthuis>dpuit){
             	winnaar = 1;
@@ -312,10 +323,11 @@ if (winnaar == 1){
     public int getUitploeg(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -341,10 +353,11 @@ if (winnaar == 1){
     public int getPunten(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -369,10 +382,11 @@ if (winnaar == 1){
     public int getGespeeld(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -397,10 +411,11 @@ if (winnaar == 1){
     public int getGewonnen(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL queryg
@@ -425,10 +440,11 @@ if (winnaar == 1){
     public int getGelijk(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -453,10 +469,11 @@ if (winnaar == 1){
     public int getVerloren(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -481,10 +498,11 @@ if (winnaar == 1){
     public int getDoelpunten_v(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -509,10 +527,11 @@ if (winnaar == 1){
     public int getDoelpunten_T(int team) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+    		Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -537,10 +556,11 @@ if (winnaar == 1){
     public ResultSet Stand(int comp) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -560,10 +580,11 @@ if (winnaar == 1){
     public ResultSet Prog(int comp, int ronde) throws Exception {
         try {
             // This will load the MySQL driver, each DB has its own driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("org.postgresql.Driver");
             // Setup the connection with the DB
-            connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+        	Connection connect = null;
+        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+            
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
@@ -586,10 +607,11 @@ private ResultSet rs3 = null;
 public String naamthuis(int thuis) throws Exception{
 	try {
         // This will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+    	Connection connect = null;
+    	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+        
         // Statements allow to issue SQL queries to the database
         statement = connect.createStatement();
         // Result set get the result of the SQL query
@@ -615,10 +637,11 @@ private ResultSet rs4 = null;
 public String naamuit(int uit) throws Exception{
 	try {
         // This will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+    	Connection connect = null;
+    	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+        
         // Statements allow to issue SQL queries to the database
         statement = connect.createStatement();
         // Result set get the result of the SQL query
@@ -644,10 +667,10 @@ private ResultSet rs13 = null;
 public ResultSet ControleerLid(String user, String pasw) throws Exception{
 	try {
         // This will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+    	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+        
         // Statements allow to issue SQL queries to the database
         statement = connect.createStatement();
         // Result set get the result of the SQL query
@@ -669,10 +692,11 @@ private ResultSet rs14 = null;
 public ResultSet ControleerClub(String user, String pasw) throws Exception{
 	try {
         // This will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+    	Connection connect = null;
+    	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+        
         // Statements allow to issue SQL queries to the database
         statement = connect.createStatement();
         // Result set get the result of the SQL query
@@ -693,11 +717,11 @@ private ResultSet rs15 = null;
 
 public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
 	try {
-        // This will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+    	Connection connect = null;
+    	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+        
         // Statements allow to issue SQL queries to the database
         statement = connect.createStatement();
         // Result set get the result of the SQL query
@@ -719,10 +743,11 @@ private ResultSet rs16 = null;
 public ResultSet GetwwBeheerder() throws Exception{
 	try {
         // This will load the MySQL driver, each DB has its own driver
-        Class.forName("com.mysql.cj.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
-        connect = DriverManager.getConnection("jdbc:mysql://localhost/ipass?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "ipass","1234");
-
+    	Connection connect = null;
+    	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
+        
         // Statements allow to issue SQL queries to the database
         statement = connect.createStatement();
         // Result set get the result of the SQL query

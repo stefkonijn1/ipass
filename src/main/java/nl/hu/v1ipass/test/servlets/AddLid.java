@@ -21,14 +21,18 @@ public class AddLid extends HttpServlet {
  String naam = req.getParameter("naam");
  String achternaam = req.getParameter("achternaam");
  String leeftijd = req.getParameter("leeftijd");
+ String pasw = req.getParameter("pasw");
+
  String team = req.getParameter("team");
  
  int team1 = Integer.parseInt(team);
+ int leeftijd1 = Integer.parseInt(leeftijd);
+
 
  
  
  try {
-	dao.AddLid(naam, achternaam, leeftijd, team1);
+	dao.AddLid(naam, achternaam, leeftijd1, team1, pasw);
 } catch (Exception e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();

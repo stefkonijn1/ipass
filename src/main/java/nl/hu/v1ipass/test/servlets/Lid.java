@@ -27,8 +27,13 @@ public class Lid extends HttpServlet {
  
  try {
 		ResultSet result = dao.ControleerLid(user, pasw);
+		
 		while(result.next()){
-			if (result.getString("naam").equals(user)){
+			String em = result.getString("Naam");
+			System.out.println(user);
+		    System.out.println(em);
+			if (em.equals(user)){
+				System.out.println("gelijk");
 				
 			
 				

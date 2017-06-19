@@ -19,11 +19,14 @@ public class AddTeam extends HttpServlet {
 		Codes dao = new Codes();
 		
  String naam = req.getParameter("team");
- String achternaam = req.getParameter("klasse");
+ String klasse = req.getParameter("klasse");
+ 
+ int klasse1 = Integer.parseInt(klasse);
+
  
  
  try {
-	dao.AddTeam(naam, achternaam);
+	dao.AddTeam(naam, klasse1);
 } catch (Exception e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();
