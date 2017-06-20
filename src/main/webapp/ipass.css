@@ -25,10 +25,7 @@ li a:hover {
 H1 { text-align: center }
 body { text-align: center ;
 }
-p1 {
-	top:25%;
-    left:80%; 
-}
+
 
 table, th, td {
     border: 1px solid black;
