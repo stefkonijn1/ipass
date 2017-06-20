@@ -321,7 +321,7 @@ if (winnaar == 1){
 
     }
     private ResultSet rs12 = null;
-    public int getUitploeg(int team) throws Exception{
+    public int getUitploeg(int team, int ronde) throws Exception{
     	try {
             // This will load the MySQL driver, each DB has its own driver
     		Class.forName("org.postgresql.Driver");
@@ -332,8 +332,10 @@ if (winnaar == 1){
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
-            preparedStatement = connect.prepareStatement("SELECT Uitploeg FROM Programma WHERE Thuisploeg = ?;");
+            preparedStatement = connect.prepareStatement("SELECT Uitploeg FROM Programma WHERE Thuisploeg = ? and datum = ?;");
             preparedStatement.setInt(1, team);
+            preparedStatement.setInt(1, ronde);
+
             rs12  = preparedStatement.executeQuery();
 
             int str = 0;

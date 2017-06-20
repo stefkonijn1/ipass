@@ -35,7 +35,7 @@ public class Uitslagen extends HttpServlet {
  try {
 		dao.UitslagDoorgevenProg(thuis1, ronde1, dpthuis1, dpuit1);
 		dao.UitslagDoorgevenTeamsThuis(thuis1, ronde1, dpthuis1, dpuit1);
-		dao.UitslagDoorgevenTeamsUit(dao.getUitploeg(thuis1), ronde1, dpthuis1, dpuit1);
+		dao.UitslagDoorgevenTeamsUit(dao.getUitploeg(thuis1, ronde1), ronde1, dpthuis1, dpuit1);
 		} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
