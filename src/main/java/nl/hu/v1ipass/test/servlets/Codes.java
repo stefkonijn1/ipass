@@ -11,7 +11,7 @@ import java.util.Date;
 import com.mysql.cj.api.mysqla.result.Resultset;
 
 public class Codes {
-    private Connection connect = null;
+//    private Connection connect = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
@@ -34,13 +34,13 @@ public class Codes {
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
+          connect.close();
 
 
         } catch (Exception e) {
             throw e;
         } finally {
             close();
-            connect.close();
         }
 
     }
@@ -61,6 +61,7 @@ public class Codes {
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
 
+          connect.close();
 
         } catch (Exception e) {
             throw e;
@@ -92,6 +93,7 @@ public class Codes {
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
+          connect.close();
 
 
         } catch (Exception e) {
@@ -117,6 +119,7 @@ public class Codes {
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
+          connect.close();
 
 
         } catch (Exception e) {
@@ -148,6 +151,7 @@ public class Codes {
 
           System.out.println("Gelukt!");
 
+          connect.close();
 
         } catch (Exception e) {
             throw e;
@@ -222,6 +226,7 @@ if (winnaar == 1){
         
 
           System.out.println("Gelukt!");
+          connect.close();
 
 
         } catch (Exception e) {
@@ -311,6 +316,7 @@ if (winnaar == 1){
                     
 
                       System.out.println("Gelukt!");
+                      connect.close();
 
 
         } catch (Exception e) {
@@ -337,6 +343,7 @@ if (winnaar == 1){
             preparedStatement.setInt(2, ronde);
 
             rs12  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs12.next()) {
@@ -367,6 +374,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT punten FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs5  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs5.next()) {
@@ -396,6 +404,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT Gespeelde_wedstrijden FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs6  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs6.next()) {
@@ -425,6 +434,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT Gewonnen FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs7  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs7.next()) {
@@ -454,6 +464,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT Gelijk FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs8  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs8.next()) {
@@ -483,6 +494,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT Verloren FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs9  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs9.next()) {
@@ -512,6 +524,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT Doelpunten_V FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs10  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs10.next()) {
@@ -541,6 +554,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("SELECT Doelpunten_T FROM Teams WHERE Teamcode = ?;");
             preparedStatement.setInt(1, team);
             rs11  = preparedStatement.executeQuery();
+            connect.close();
 
             int str = 0;
             while (rs11.next()) {
@@ -571,6 +585,7 @@ if (winnaar == 1){
             preparedStatement.setInt(1, comp);
             rs1  = preparedStatement.executeQuery();
 
+            connect.close();
 
 //            writeResultSet(resultSet);
         } catch (Exception e) {
@@ -597,6 +612,7 @@ if (winnaar == 1){
 
             rs2  = preparedStatement.executeQuery();
 
+            connect.close();
 
 //            writeResultSet(resultSet);
         } catch (Exception e) {
@@ -621,6 +637,7 @@ public String naamthuis(int thuis) throws Exception{
         preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
         preparedStatement.setInt(1, thuis);
         rs3  = preparedStatement.executeQuery();
+        connect.close();
 
         String str = "";
         while (rs3.next()) {
@@ -651,6 +668,7 @@ public String naamuit(int uit) throws Exception{
         preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
         preparedStatement.setInt(1, uit);
         rs3  = preparedStatement.executeQuery();
+        connect.close();
 
         String str = "";
         while (rs3.next()) {
@@ -670,6 +688,8 @@ private ResultSet rs13 = null;
 public ResultSet ControleerLid(String user, String pasw) throws Exception{
 	try {
         // This will load the MySQL driver, each DB has its own driver
+    	Connection connect = null;
+
 		Class.forName("org.postgresql.Driver");
         // Setup the connection with the DB
     	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
@@ -682,6 +702,7 @@ public ResultSet ControleerLid(String user, String pasw) throws Exception{
 
         rs13  = preparedStatement.executeQuery();
 
+        connect.close();
 
 //        writeResultSet(resultSet);
     } catch (Exception e) {
@@ -708,6 +729,7 @@ public ResultSet ControleerClub(String user, String pasw) throws Exception{
 
         rs14  = preparedStatement.executeQuery();
 
+        connect.close();
 
 //        writeResultSet(resultSet);
     } catch (Exception e) {
@@ -733,6 +755,7 @@ public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
 
         rs15  = preparedStatement.executeQuery();
 
+        connect.close();
 
 //        writeResultSet(resultSet);
     } catch (Exception e) {
@@ -758,6 +781,7 @@ public ResultSet GetwwBeheerder() throws Exception{
 
         rs16  = preparedStatement.executeQuery();
 
+        connect.close();
 
 //        writeResultSet(resultSet);
     } catch (Exception e) {
@@ -811,9 +835,7 @@ public ResultSet GetwwBeheerder() throws Exception{
                 statement.close();
             }
 
-            if (connect != null) {
-                connect.close();
-            }
+            
         } catch (Exception e) {
 
         }
