@@ -332,7 +332,7 @@ if (winnaar == 1){
             // Statements allow to issue SQL queries to the database
             statement = connect.createStatement();
             // Result set get the result of the SQL query
-            preparedStatement = connect.prepareStatement("SELECT Uitploeg FROM Programma WHERE Thuisploeg = ? and datum = ?;");
+            preparedStatement = connect.prepareStatement("SELECT Uitploeg FROM Programma WHERE Thuisploeg = ? AND datum = ?;");
             preparedStatement.setInt(1, team);
             preparedStatement.setInt(2, ronde);
 
