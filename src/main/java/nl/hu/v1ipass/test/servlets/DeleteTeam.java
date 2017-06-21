@@ -26,7 +26,6 @@ public class DeleteTeam extends HttpServlet {
  try {
 	dao.DeleteTeam(id1);
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 

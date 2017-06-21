@@ -21,9 +21,6 @@ public class Club extends HttpServlet {
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
-
-
- 
  
  try {
 		ResultSet result = dao.ControleerClub(user, pasw);
@@ -31,11 +28,6 @@ public class Club extends HttpServlet {
 			if (result.getString("Clubnaam").equals(user)){
 				
 			
-				
-			
-
-	 
-
 	 PrintWriter out = resp.getWriter();
 	 resp.setContentType("text.html");
 	 out.println("<!DOCTYPE html>");
@@ -49,14 +41,10 @@ public class Club extends HttpServlet {
 	 out.println("  <li><a href='stand_club.html'>Stand</a></li>");
 	 out.println("  <li><a href='prog_club.html'>Programmma</a></li>");
 	 out.println("  <li><a href='uitslag_club.html'>Uitslag doorgeven</a></li>");
-
 	 out.println("</ul>");
-	 out.println("<h1>Wel gelukt!</h1>");
+	 out.println("<h1>U bent nu ingelogd als club!</h1>");
 	 out.println("<form class='ann', action='home_club.html'>");
 	 out.println("    <input type='submit' value='Ga terug' />");
-
-
-
 	 out.println(" </body>");
 	 out.println("</html>");
 		}}
@@ -68,23 +56,16 @@ public class Club extends HttpServlet {
 			 out.println("  <title>Team toevoegen</title>");
 			 out.println(" <body>");
 			 out.println(" <br/><br/><br/><br/>");
-
 			 out.println(" <p><img src='vep1.jpg' alt='vep1' width='700' height='100'></p>");
 			 out.println(" <ul>");
 			 out.println(" <li><a class='active' href='index.html'>Home</a></li>");
-
-
 			 out.println("</ul>");
-			 out.println("<h1>Niet gelukt!</h1>");
+			 out.println("<h1>Het inloggen is niet gelukt!</h1>");
 			 out.println("<form class='ann', action='index.html'>");
 			 out.println("    <input type='submit' value='Ga terug' />");
-
-
-
 			 out.println(" </body>");
 			 out.println("</html>");}
  catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	 

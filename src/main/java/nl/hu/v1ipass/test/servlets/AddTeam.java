@@ -28,7 +28,6 @@ public class AddTeam extends HttpServlet {
  try {
 	dao.AddTeam(naam, klasse1);
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 
@@ -53,9 +52,6 @@ public class AddTeam extends HttpServlet {
  out.println(" <h1>Team toevoegen gelukt!</h1>");
  out.println("<form class='ann', action='inlog.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
-
-
-
  out.println(" </body>");
  out.println("</html>");
 

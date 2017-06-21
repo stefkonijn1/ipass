@@ -27,13 +27,7 @@ public class ProgrammaClub extends HttpServlet {
 
  
  
-// try {
-//	dao.Stand(id1);
-//} catch (Exception e) {
-//	// TODO Auto-generated catch block
-//	e.printStackTrace();
-//}
- 
+
 try {
 	ResultSet result = dao.Prog(comp1, ronde1);
 
@@ -52,7 +46,6 @@ try {
  out.println("  <li><a href='stand_club.html'>Stand</a></li>");
  out.println("  <li><a href='prog_club.html'>Programmma</a></li>");
  out.println("  <li><a href='uitslag_club.html'>Uitslag doorgeven</a></li>");
-
  out.println("</ul>");
  out.println(" <h1>Het programma van competitie "+ comp +" op speeldag "+ronde+ "</h1>");
  out.println("<table BORDER=1 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>"+"<tr> <th>Ronde</th> <th>Thuis</th>  <th>Uit</th> <th>DpThuis</th> <th>Dpuit</th> </tr>");
@@ -76,7 +69,6 @@ out.println("</table>");
  out.println(" </body>");
  out.println("</html>");
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
  

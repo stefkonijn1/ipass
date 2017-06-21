@@ -22,7 +22,6 @@ public class AddLid extends HttpServlet {
  String achternaam = req.getParameter("achternaam");
  String leeftijd = req.getParameter("leeftijd");
  String pasw = req.getParameter("pasw");
-
  String team = req.getParameter("team");
  
  int team1 = Integer.parseInt(team);
@@ -34,7 +33,6 @@ public class AddLid extends HttpServlet {
  try {
 	dao.AddLid(naam, achternaam, leeftijd1, team1, pasw);
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 
@@ -59,9 +57,6 @@ public class AddLid extends HttpServlet {
  out.println(" <h1>Lid toevoegen gelukt!</h1>");
  out.println("<form class='ann', action='inlog.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
-
-
-
  out.println(" </body>");
  out.println("</html>");
 

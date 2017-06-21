@@ -22,13 +22,7 @@ public class StandLid extends HttpServlet {
  int id1 = Integer.parseInt(id);
 
  
- 
-// try {
-//	dao.Stand(id1);
-//} catch (Exception e) {
-//	// TODO Auto-generated catch block
-//	e.printStackTrace();
-//}
+
  
 try {
 	ResultSet result = dao.Stand(id1);
@@ -75,7 +69,6 @@ out.println("</table>");
  out.println(" </body>");
  out.println("</html>");
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
  

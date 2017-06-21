@@ -25,15 +25,6 @@ public class Programma extends HttpServlet {
  int ronde1 = Integer.parseInt(ronde);
 
 
- 
- 
-// try {
-//	dao.Stand(id1);
-//} catch (Exception e) {
-//	// TODO Auto-generated catch block
-//	e.printStackTrace();
-//}
- 
 try {
 	ResultSet result = dao.Prog(comp1, ronde1);
 
@@ -79,7 +70,6 @@ out.println("</table>");
  out.println(" </body>");
  out.println("</html>");
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
  

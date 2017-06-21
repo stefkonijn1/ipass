@@ -26,7 +26,6 @@ public class DeleteLid extends HttpServlet {
  try {
 	dao.DeleteLid(id1);
 } catch (Exception e) {
-	// TODO Auto-generated catch block
 	e.printStackTrace();
 }
 
@@ -51,9 +50,6 @@ public class DeleteLid extends HttpServlet {
  out.println(" <h1>Lid verwijderen gelukt!</h1>");
  out.println("<form class='ann', action='inlog.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
-
-
-
  out.println(" </body>");
  out.println("</html>");
 

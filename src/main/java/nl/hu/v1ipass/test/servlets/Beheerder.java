@@ -22,9 +22,6 @@ public class Beheerder extends HttpServlet {
  String pasw = req.getParameter("pasw");
 
 
-
- 
- 
  try {
 		ResultSet result = dao.ControleerBeheerder(user, pasw);
 		while(result.next()){
@@ -32,9 +29,6 @@ public class Beheerder extends HttpServlet {
 				
 			
 				
-			
-
-	 
 	 PrintWriter out = resp.getWriter();
 	 resp.setContentType("text.html");
 	 out.println("<!DOCTYPE html>");
@@ -52,14 +46,10 @@ public class Beheerder extends HttpServlet {
 	 out.println("  <li><a href='team2.html'>Team verwijderen</a></li>");
 	 out.println("  <li><a href='lid1.html'>Lid toevoegen</a></li>");
 	 out.println("  <li><a href='lid2.html'>Lid verwijderen</a></li>");
-
 	 out.println("</ul>");
-	 out.println("<h1>Wel gelukt!</h1>");
+	 out.println("<h1>U bent nu ingelogd als beheerder!</h1>");
 	 out.println("<form class='ann', action='inlog.html'>");
 	 out.println("    <input type='submit' value='Ga terug' />");
-
-
-
 	 out.println(" </body>");
 	 out.println("</html>");
 		}
@@ -75,23 +65,16 @@ public class Beheerder extends HttpServlet {
  out.println("  <title>Team toevoegen</title>");
  out.println(" <body>");
  out.println(" <br/><br/><br/><br/>");
-
  out.println(" <p><img src='vep1.jpg' alt='vep1' width='700' height='100'></p>");
  out.println(" <ul>");
  out.println(" <li><a class='active' href='index.html'>Home</a></li>");
-
-
  out.println("</ul>");
- out.println("<h1>Niet gelukt!</h1>");
+ out.println("<h1>Het inoggen is niet gelukt, probeer het opnieuw!</h1>");
  out.println("<form class='ann', action='index.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
-
-
-
  out.println(" </body>");
  out.println("</html>");}
  catch (Exception e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	 
