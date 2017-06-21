@@ -34,8 +34,8 @@ table, th, td {
     width:600px;
     height:100px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-50px;  /* half of height */
+    margin-left:-300px;
+    margin-top:-50px; 
     top:65%;
     left:50%;
     text-align: center;
@@ -46,8 +46,8 @@ table, th, td {
 	    width:600px;
     height:100px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-50px;  /* half of height */
+    margin-left:-300px; 
+    margin-top:-50px;  
     top:50%;
     left:50%;
 }
@@ -55,8 +55,8 @@ table, th, td {
 	    width:600px;
     height:100px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-50px;  /* half of height */
+    margin-left:-300px; 
+    margin-top:-50px;  
     top:60%;
     left:68%;
 }
@@ -64,8 +64,8 @@ table, th, td {
 	    width:600px;
     height:100px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-50px;  /* half of height */
+    margin-left:-300px; 
+    margin-top:-50px;  
     top:60%;
     left:50%;
 }
@@ -73,8 +73,8 @@ table, th, td {
 		    width:100px;
     height:30px;
     position:fixed;
-    margin-left:-50px; /* half of width */
-    margin-top:-15px;  /* half of height */
+    margin-left:-50px; 
+    margin-top:-15px;  
     top:90%;
     left:90%;
 }
@@ -82,8 +82,8 @@ table#table1 {
 	    width:600px;
     height:50px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-25px;  /* half of height */
+    margin-left:-300px; 
+    margin-top:-25px;  
     top:70%;
     left:50%;
     text-align: center;
@@ -93,8 +93,8 @@ table#table2 {
 	    width:400px;
     height:50px;
     position:fixed;
-    margin-left:-200px; /* half of width */
-    margin-top:-25px;  /* half of height */
+    margin-left:-200px; 
+    margin-top:-25px;  
     top:65%;
     left:50%;
     text-align: center;
@@ -105,8 +105,8 @@ table#table2 {
 		    width:600px;
     height:100px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-50px;  /* half of height */
+    margin-left:-300px; 
+    margin-top:-50px;  
     top:80%;
     left:50%;
 }
@@ -114,8 +114,8 @@ table#table2 {
 		    width:600px;
     height:100px;
     position:fixed;
-    margin-left:-300px; /* half of width */
-    margin-top:-50px;  /* half of height */
+    margin-left:-300px; 
+    margin-top:-50px;  
     top:50%;
     left:50%;
 }
@@ -128,14 +128,12 @@ a.button {
     color: initial;
 }
 
-/* Popup container */
 .popup {
     position: relative;
     display: inline-block;
     cursor: pointer;
 }
 
-/* The actual popup (appears on top) */
 .popup .popuptext {
     visibility: hidden;
     width: 160px;
@@ -151,7 +149,6 @@ a.button {
     margin-left: -100px;
 }
 
-/* Popup arrow */
 .popup .popuptext::after {
     content: "";
     position: absolute;
@@ -163,14 +160,12 @@ a.button {
     border-color: #555 transparent transparent transparent;
 }
 
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
 .popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s
 }
 
-/* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
     from {opacity: 0;} 
     to {opacity: 1;}
