@@ -694,37 +694,6 @@ public ResultSet GetwwBeheerder() throws Exception{
 	return rs16;
 
 }
-//    private void writeResultSet(ResultSet resultSet) throws SQLException {
-//        while (resultSet.next()) {
-//            // also possible to get the columns via the column number
-//            // which starts at 1
-//            // e.g. resultSet.getSTring(2);
-//            int id = resultSet.getInt("Teamcode");
-//            String naam = resultSet.getString("Teamnaam");
-//            int klasse = resultSet.getInt("Klasse");
-//            int gesp = resultSet.getInt("Gespeelde_wedstrijden");
-//            int gew = resultSet.getInt("Gewonnen");
-//            int gl = resultSet.getInt("Gelijk");
-//            int vl = resultSet.getInt("Verloren");
-//            int p = resultSet.getInt("Punten");
-//            int v = resultSet.getInt("Doelpunten_V");
-//            int t = resultSet.getInt("Doelpunten_T");
-//            int club = resultSet.getInt("Club_id");
-//            System.out.println("ID: " + id);
-//            System.out.println("Naam: " + naam);
-//            System.out.println("Klasse: " + klasse);
-//            System.out.println("Wed: " + gesp);
-//            System.out.println("Geewonnen: " + gew);
-//            System.out.println("gl: " + gl);
-//            System.out.println("vl: " + vl);
-//            System.out.println("p: " + p);
-//            System.out.println("v: " + v);
-//            System.out.println("t: " + t);
-//            System.out.println("c: " + club);
-//            
-//
-//        }
-//    }
 
     
     private void close() {
