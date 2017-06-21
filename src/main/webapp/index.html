@@ -14,61 +14,16 @@
 
 
 <p>Welkom, wat wilt u doen?</p>
-<div class="popup" onclick="myFunction()">Log in als lid!
-  <span class="popuptext" id="myPopup">
-  <form action="Lid.java" method="get">
- 
-Inlog lid:<br>
-  <input type="text" name="user">
-  <br><br>
-  Password:<br/>
-    <input type="text" name="pasw">
-  <br><br>
-  <input type="submit" value="Bekijk" >
-  </form></span>
-</div>
-  <br/><br/>
-    <div class="popup" onclick="myFunction2()">Log in als Club!
-  <span class="popuptext" id="myPopup1">
-  <form action="Club.java" method="get">
- 
-Inlog club:<br>
-  <input type="text" name="user">
-  <br><br>
-  Password:<br/>
-    <input type="text" name="pasw">
-  <br><br>
-  <input type="submit" value="Bekijk" >
-  </form></span>
-</div>
-<br/><br/>
-    <div class="popup" onclick="myFunction3()">Log in als Beheerder!
-  <span class="popuptext" id="myPopup2">
-  <form action="Beheerder.java" method="get">
- 
-Inlog beheerder:<br>
-  <input type="text" name="user">
-  <br><br>
-  Password:<br/>
-    <input type="text" name="pasw">
-  <br><br>
-  <input type="submit" value="Bekijk" >
-  </form></span>
-</div>
-  </form>
-  <script>
-function myFunction() {
-    var popup = document.getElementById("myPopup");
-    popup.classList.toggle("show");
-}
-function myFunction2() {
-    var popup = document.getElementById("myPopup1");
-    popup.classList.toggle("show");
-}
-function myFunction3() {
-    var popup = document.getElementById("myPopup2");
-    popup.classList.toggle("show");
-}
-</script>
+<form action="login_lid.html">
+    <input type="submit" value="Inloggen als lid" />
+</form>
+<br/>
+<form action="login_club.html">
+    <input type="submit" value="Inloggen als club" />
+</form>
+<br/>
+<form  action="login_beheerder.html">
+    <input type="submit" value="Inloggen als beheerder" />
+</form>
  </body>
 </html>
