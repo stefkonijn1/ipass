@@ -61,7 +61,7 @@ out.println("<tr>"
           		+ "</tr>");
 }
 out.println("</table>");
- out.println("<form class='ann', action='home.html'>");
+ out.println("<form class='ann', action='home_club.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
 
 
