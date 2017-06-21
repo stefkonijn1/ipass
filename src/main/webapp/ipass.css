@@ -203,8 +203,11 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
-}
+    width: 50%;
+	top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;}
 
 button:hover {
     opacity: 0.8;
