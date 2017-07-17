@@ -109,9 +109,9 @@ public class LidDAOImpl implements LidDAO {
 
     }
 	@Override
-	public ResultSet ControleerLid(LidPOJO lid) throws Exception{
+	public String ControleerLid(LidPOJO lid) throws Exception{
 		ResultSet rs13 = null;
-
+		String value = null;
 		try {
 			Connection connect = null;
         	connect = getConnection();
@@ -121,13 +121,14 @@ public class LidDAOImpl implements LidDAO {
 	        preparedStatement.setString(1, lid.getPasw());
 
 	        rs13  = preparedStatement.executeQuery();
+	        value = rs13.getString("password");
 
 	        connect.close();
 
 	    } catch (Exception e) {
 	        throw e;
 	    } 
-		return rs13;
+		return value;
 
 	}
 

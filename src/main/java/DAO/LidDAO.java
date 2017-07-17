@@ -35,7 +35,7 @@ public interface LidDAO {
 
 
 
-	ResultSet ControleerLid(LidPOJO lid) throws Exception;
+	String ControleerLid(LidPOJO lid) throws Exception;
 
 
 

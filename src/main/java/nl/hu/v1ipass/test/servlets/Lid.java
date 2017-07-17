@@ -25,10 +25,10 @@ public class Lid extends HttpServlet {
 
  
  try {
-		ResultSet result = liddao.ControleerLid(liddao.findLidByName(user));
+		String result = liddao.ControleerLid(liddao.findLidByName(user));
 		
-		while(result.next()){
-			String em = result.getString("Naam");
+		
+			String em = result;
 			System.out.println(user);
 		    System.out.println(em);
 			if (em.equals(user)){
@@ -58,7 +58,7 @@ public class Lid extends HttpServlet {
 	 out.println("    <input type='submit' value='Ga terug' />");
 	 out.println(" </body>");
 	 out.println("</html>");
-		}}
+		}
 			 PrintWriter out = resp.getWriter();
 			 resp.setContentType("text.html");
 			 out.println("<!DOCTYPE html>");
