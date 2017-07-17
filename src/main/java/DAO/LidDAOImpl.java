@@ -35,6 +35,18 @@ public class LidDAOImpl implements LidDAO {
 		
 		return lid;
     }
+    @Override
+	public LidPOJO findLidByName(String naam) throws SQLException {
+		String queryString = "SELECT * FROM leden WHERE naam = " + naam;
+		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
+		LidPOJO lid = new LidPOJO();
+		while (res.next()) {
+			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+			lid.setId(res.getInt("id"));
+		}
+		
+		return lid;
+    }
 		
 	@Override
 	public void AddLid(LidPOJO lid) throws Exception {
@@ -97,6 +109,27 @@ public class LidDAOImpl implements LidDAO {
         }
 
     }
+	private ResultSet rs13 = null;
+	@Override
+	public ResultSet ControleerLid(LidPOJO lid) throws Exception{
+		try {
+			Connection connect = null;
+        	connect = getConnection();
+            
+	        statement = connect.createStatement();
+	        preparedStatement = connect.prepareStatement("SELECT naam FROM LEDEN WHERE Password = ?");
+	        preparedStatement.setString(1, lid.getPasw());
+
+	        rs13  = preparedStatement.executeQuery();
+
+	        connect.close();
+
+	    } catch (Exception e) {
+	        throw e;
+	    } 
+		return rs13;
+
+	}
 
 	@Override
 	public void close() {

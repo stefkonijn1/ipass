@@ -1,5 +1,6 @@
 package DAO;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import POJO.LidPOJO;
@@ -28,6 +29,17 @@ public interface LidDAO {
 
 
 	void DeleteLid(int id) throws Exception;
+
+
+
+
+
+
+	ResultSet ControleerLid(LidPOJO lid) throws Exception;
+
+
+
+	LidPOJO findLidByName(String naam) throws SQLException;
 
 
 

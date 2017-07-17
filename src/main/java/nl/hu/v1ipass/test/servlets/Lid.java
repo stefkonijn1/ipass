@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.LidDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Lid.java")
@@ -17,13 +18,14 @@ public class Lid extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		LidDAOImpl liddao = new LidDAOImpl();
 		
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
  
  try {
-		ResultSet result = dao.ControleerLid(user, pasw);
+		ResultSet result = liddao.ControleerLid(liddao.findLidByName(user));
 		
 		while(result.next()){
 			String em = result.getString("Naam");
