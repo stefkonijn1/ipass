@@ -74,7 +74,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 	}
    
     @Override
-    public ResultSet Prog(ProgrammaPOJO prog) throws Exception {
+    public ResultSet Prog(int comp, int ronde) throws Exception {
          ResultSet rs2 = null;
 
         try {
@@ -83,8 +83,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         	
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement("SELECT Wedstrijd_id, datum, Thuisploeg, Uitploeg, Doelpunten_T, Doelpunten_U FROM PROGRAMMA WHERE competitie = ? AND Datum = ?;");
-            preparedStatement.setInt(1, prog.getCompetitie());
-            preparedStatement.setInt(2, prog.getRonde());
+            preparedStatement.setInt(1, comp);
+            preparedStatement.setInt(2, ronde);
 
             rs2  = preparedStatement.executeQuery();
 
@@ -105,6 +105,12 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 
 	@Override
 	public ResultSet findProgrammaCompetitie(int i) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultSet Prog(ProgrammaPOJO prog) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

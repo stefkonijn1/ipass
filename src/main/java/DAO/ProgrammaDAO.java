@@ -28,6 +28,9 @@ public interface ProgrammaDAO {
 
 
 	ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException;
+
+
+	ResultSet Prog(int comp, int ronde) throws Exception;
 	
 
 
