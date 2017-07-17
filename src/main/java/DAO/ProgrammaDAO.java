@@ -39,7 +39,7 @@ public interface ProgrammaDAO {
 	void UitslagDoorgevenProg(ProgrammaPOJO prog) throws Exception;
 
 
-	ArrayList<Integer> findIdFromNaam(int thuis, int ronde) throws SQLException;
+	int findIdFromNaam(int thuis, int ronde) throws SQLException;
 	
 
 

@@ -154,7 +154,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 
     }
     @Override
-    public ArrayList<Integer> findIdFromNaam(int thuis, int ronde) throws SQLException {
+    public int findIdFromNaam(int thuis, int ronde) throws SQLException {
+    	int programmaID = 0;
     	Connection connect = null;
     	connect = getConnection();
 		preparedStatement = connect.prepareStatement("SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE thuisploeg = ? AND datum = ?");
@@ -164,10 +165,12 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		ArrayList<Integer> progArray = new ArrayList<Integer>();
 		while (rs1.next()) {
 			progArray.add(rs1.getInt("wedstrijd_id"));
-
 		}
-
-		return progArray;
+		for (int n : progArray){
+		 	 programmaID += n;
+		 	
+		 }
+		return programmaID;
 
 	}
    

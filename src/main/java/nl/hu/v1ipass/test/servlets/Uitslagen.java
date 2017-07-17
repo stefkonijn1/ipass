@@ -40,7 +40,6 @@ public class Uitslagen extends HttpServlet {
 
  
  
- int programmaID = (Integer) null;
 
  try {
 	 ArrayList<Integer> prog = progdao.findIdFromNaam(thuis1, ronde1);
