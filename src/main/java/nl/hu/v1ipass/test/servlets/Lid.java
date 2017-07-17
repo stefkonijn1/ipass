@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.LidDAOImpl;
-import POJO.LidPOJO;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Lid.java")
@@ -26,11 +25,13 @@ public class Lid extends HttpServlet {
 
  
  try {
-		String result = liddao.ControleerLid(liddao.findLidByName(user));
-		LidPOJO naam = liddao.findLidByName(user);
-		LidPOJO ww = liddao.findLidByName(pasw);
-
-			if (naam.equals(ww)){
+		ResultSet result = liddao.ControleerLid(user, pasw);
+		
+		while(result.next()){
+			String em = result.getString("Naam");
+			System.out.println(user);
+		    System.out.println(em);
+			if (em.equals(user)){
 				System.out.println("gelijk");
 				
 			
@@ -57,7 +58,7 @@ public class Lid extends HttpServlet {
 	 out.println("    <input type='submit' value='Ga terug' />");
 	 out.println(" </body>");
 	 out.println("</html>");
-		}
+		}}
 			 PrintWriter out = resp.getWriter();
 			 resp.setContentType("text.html");
 			 out.println("<!DOCTYPE html>");

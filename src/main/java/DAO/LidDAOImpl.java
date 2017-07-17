@@ -120,26 +120,24 @@ public class LidDAOImpl implements LidDAO {
 
     }
 	@Override
-	public String ControleerLid(LidPOJO lid) throws Exception{
+	public ResultSet ControleerLid(String naam, String pasw) throws Exception{
 		ResultSet rs13 = null;
-		String value = null;
 		try {
 			Connection connect = null;
         	connect = getConnection();
             
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT naam FROM LEDEN WHERE Password = ?");
-	        preparedStatement.setString(1, lid.getPasw());
+	        preparedStatement.setString(1, pasw);
 
 	        rs13  = preparedStatement.executeQuery();
-	        value = rs13.getString("password");
 
 	        connect.close();
 
 	    } catch (Exception e) {
 	        throw e;
 	    } 
-		return value;
+		return rs13;
 
 	}
 

@@ -35,7 +35,6 @@ public interface LidDAO {
 
 
 
-	String ControleerLid(LidPOJO lid) throws Exception;
 
 
 
@@ -44,6 +43,10 @@ public interface LidDAO {
 
 
 	LidPOJO findLidByPasw(String pasw) throws SQLException;
+
+
+
+	ResultSet ControleerLid(String naam, String pasw) throws Exception;
 
 
 
