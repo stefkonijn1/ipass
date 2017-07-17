@@ -43,6 +43,10 @@ public interface LidDAO {
 
 
 
+	LidPOJO findLidByPasw(String pasw) throws SQLException;
+
+
+
 
 
 

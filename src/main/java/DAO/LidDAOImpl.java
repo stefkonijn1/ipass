@@ -46,6 +46,17 @@ public class LidDAOImpl implements LidDAO {
 		
 		return lid;
     }
+    @Override
+   	public LidPOJO findLidByPasw(String pasw) throws SQLException {
+   		String queryString = "SELECT * FROM leden WHERE password = " + pasw;
+   		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
+   		LidPOJO lid = new LidPOJO();
+   		while (res.next()) {
+   			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+   		}
+   		
+   		return lid;
+       }
 		
 	@Override
 	public void AddLid(LidPOJO lid) throws Exception {

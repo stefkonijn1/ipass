@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.LidDAOImpl;
+import POJO.LidPOJO;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Lid.java")
@@ -26,12 +27,10 @@ public class Lid extends HttpServlet {
  
  try {
 		String result = liddao.ControleerLid(liddao.findLidByName(user));
-		
-		
-			String em = result;
-			System.out.println(user);
-		    System.out.println(em);
-			if (em.equals(user)){
+		LidPOJO naam = liddao.findLidByName(user);
+		LidPOJO ww = liddao.findLidByName(pasw);
+
+			if (naam.equals(ww)){
 				System.out.println("gelijk");
 				
 			
