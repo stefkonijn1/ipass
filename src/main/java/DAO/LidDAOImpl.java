@@ -25,6 +25,8 @@ public class LidDAOImpl implements LidDAO {
     
     @Override
 	public LidPOJO findLid(int id) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
 		String queryString = "SELECT * FROM leden WHERE id = " + id;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		LidPOJO lid = new LidPOJO();
@@ -37,6 +39,9 @@ public class LidDAOImpl implements LidDAO {
     }
     @Override
 	public LidPOJO findLidByName(String naam) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
+    	
 		String queryString = "SELECT * FROM leden WHERE naam = " + naam;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		LidPOJO lid = new LidPOJO();
@@ -48,6 +53,9 @@ public class LidDAOImpl implements LidDAO {
     }
     @Override
    	public LidPOJO findLidByPasw(String pasw) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
+    	
    		String queryString = "SELECT * FROM leden WHERE password = " + pasw;
    		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
    		LidPOJO lid = new LidPOJO();

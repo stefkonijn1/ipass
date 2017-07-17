@@ -27,6 +27,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     
     @Override
 	public ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
+    	
 		ArrayList<ProgrammaPOJO> progArray = new ArrayList<ProgrammaPOJO>();
 
     	for(int n : lijst){
@@ -42,7 +45,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 
     @Override
 	public ArrayList<String> getTeamsFromProgramma(int id) throws SQLException {
-
+    	Connection connect = null;
+    	connect = getConnection();
 		String queryString = "SELECT team.teamnaam FROM teams, team_programma, programma WHERE team_programma.team = team.teamcode AND programma.wedstrijd_id = "+id;
 				
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
@@ -54,6 +58,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 	}
     @Override
 	public ArrayList<Integer> findProgrammaTeam(int i) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
 		String queryString = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, team WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND team.teamcode = team_programma.team AND team_programma.team = "	+ i;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		ArrayList<Integer> progArray = new ArrayList<Integer>();
@@ -72,10 +78,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
          ResultSet rs2 = null;
 
         try {
-        	Class.forName("org.postgresql.Driver");
         	Connection connect = null;
-        	connect = DriverManager.getConnection("jdbc:postgresql://ec2-54-247-177-33.eu-west-1.compute.amazonaws.com:5432/d4riu3puptf4ur?sslmode=require","ylagedltuploci", "dd417a43a879a89cfc8759588ecd0688f09b68a1069816399722e8e8c03df79e");
-            
+        	connect = getConnection();
+        	
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement("SELECT Wedstrijd_id, datum, Thuisploeg, Uitploeg, Doelpunten_T, Doelpunten_U FROM PROGRAMMA WHERE competitie = ? AND Datum = ?;");
             preparedStatement.setInt(1, prog.getCompetitie());
