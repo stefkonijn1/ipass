@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import POJO.ProgrammaPOJO;
 import POJO.TeamPOJO;
+import nl.hu.v1ipass.test.servlets.Programma;
+
 
 public class TeamDAOImpl implements TeamDAO {
     private Statement statement = null;
@@ -31,6 +34,16 @@ public class TeamDAOImpl implements TeamDAO {
 		while (res.next()) {
 			team = new TeamPOJO(res.getString("teamnaam"), res.getInt("klasse"));
 					}
+		String queryString2 = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, team WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND team.teamcode = team_programma.team AND team_programma.team = "	+ teamcode;
+		ResultSet res2 = getConnection().prepareStatement(queryString2).executeQuery();
+		ArrayList<ProgrammaPOJO> progArray = new ArrayList<ProgrammaPOJO>();
+		ProgrammaDAOImpl nd = new ProgrammaDAOImpl();
+		while (res2.next()) {
+			ProgrammaPOJO prog = new ProgrammaPOJO(res2.getInt("wedstrijd_id"), res2.getInt("datum"),res2.getInt("thuisploeg"),res2.getInt("uitploeg"),res2.getInt("doelpunten_t"),res2.getInt("doelpunten_u"),res2.getInt("competitie"));
+			prog.setTeams(nd.getTeamsFromProgramma(res2.getInt("id")));
+			progArray.add(prog);
+		}
+		team.setProgramma(progArray);
 		
 		return team;
     }

@@ -1,5 +1,8 @@
 package POJO;
 
+import java.util.ArrayList;
+
+
 public class ProgrammaPOJO {
 	
 	   private int id;
@@ -9,8 +12,17 @@ public class ProgrammaPOJO {
 	   private int doelpuntenthuis;
 	   private int doelpuntenuit;
 	   private int competitie;
+		private ArrayList<String> teams;
+
 	   
-	   public ProgrammaPOJO(){
+	   public ArrayList<String> getTeams() {
+			return teams;
+		}
+		public void setTeams(ArrayList<String> teams) {
+			this.teams = teams;
+		}
+		
+	public ProgrammaPOJO(){
 			
 	   }
 	   public ProgrammaPOJO(int id, int ronde,int thuis, int uit, int doelpuntenthuis,int doelpuntenuit, int competitie){
