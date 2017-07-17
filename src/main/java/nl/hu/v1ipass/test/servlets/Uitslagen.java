@@ -42,13 +42,9 @@ public class Uitslagen extends HttpServlet {
  
 
  try {
-	 ArrayList<Integer> prog = progdao.findIdFromNaam(thuis1, ronde1);
-	 for (int n : prog){
-	 	programmaID = n;
-	 	
-	 }
+
 	 //Dit is een object prog
-	  	ProgrammaPOJO programma = progdao.findProgrammaFromId(programmaID);
+	  	ProgrammaPOJO programma = progdao.findProgrammaFromId(progdao.findIdFromNaam(thuis1, ronde1));
 	  	programma.setDoelpuntenthuis(dpthuis1);
 	  	programma.setDoelpuntenuit(dpuit1);
 
