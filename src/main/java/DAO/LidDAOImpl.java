@@ -42,7 +42,6 @@ public class LidDAOImpl implements LidDAO {
 		LidPOJO lid = new LidPOJO();
 		while (res.next()) {
 			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
-			lid.setId(res.getInt("id"));
 		}
 		
 		return lid;
@@ -109,9 +108,10 @@ public class LidDAOImpl implements LidDAO {
         }
 
     }
-	private ResultSet rs13 = null;
 	@Override
 	public ResultSet ControleerLid(LidPOJO lid) throws Exception{
+		ResultSet rs13 = null;
+
 		try {
 			Connection connect = null;
         	connect = getConnection();
