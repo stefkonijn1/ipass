@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.LidDAOImpl;
+import DAO.TeamDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/DeleteTeam.java")
@@ -17,6 +19,8 @@ public class DeleteTeam extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		TeamDAOImpl teamdao = new TeamDAOImpl();
+
 		
  String id = req.getParameter("id");
  int id1 = Integer.parseInt(id);
@@ -24,7 +28,7 @@ public class DeleteTeam extends HttpServlet {
  
  
  try {
-	dao.DeleteTeam(id1);
+	teamdao.DeleteTeam(id1);
 } catch (Exception e) {
 	e.printStackTrace();
 }
