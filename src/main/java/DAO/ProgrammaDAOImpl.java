@@ -25,6 +25,15 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return conn;
 	}
     
+    public ProgrammaPOJO findProgrammaFromId(int id) throws SQLException {
+		String queryString = "SELECT * FROM programma WHERE wedstrijd_id = " + id;
+		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
+		ProgrammaPOJO prog = new ProgrammaPOJO();
+		while (res.next()) {
+			prog = new ProgrammaPOJO(res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
+		}
+		return prog;
+		}
     @Override
 	public ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException {
     	Connection connect = null;
@@ -36,7 +45,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     		String queryString = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE wedstrijd_id = "	+ n;
     		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
     		while (res.next()) {
-    			ProgrammaPOJO progpojo = new ProgrammaPOJO(res.getInt("wedstrijd_id"),res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
+    			ProgrammaPOJO progpojo = new ProgrammaPOJO(res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
     			progArray.add(progpojo);
     		}
     	}
@@ -117,7 +126,51 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return rs1;
 
     }
+    @Override
+    public void UitslagDoorgevenProg(ProgrammaPOJO prog) throws Exception {
+        try {
+        	Connection connect = null;
+        	connect = getConnection();
+        	
+            
 
+          preparedStatement = connect.prepareStatement("UPDATE PROGRAMMA SET Doelpunten_T = ?, Doelpunten_U = ? WHERE Thuisploeg = ? AND datum = ?;");
+        preparedStatement.setInt(1, prog.getDoelpuntenthuis());
+        preparedStatement.setInt(2, prog.getDoelpuntenuit());
+        preparedStatement.setInt(3, prog.getCompetitie());
+        preparedStatement.setInt(4, prog.getRonde());
+        preparedStatement.executeUpdate();
+        
+
+          System.out.println("Gelukt!");
+
+          connect.close();
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            
+        }
+
+    }
+    @Override
+    public ArrayList<Integer> findIdFromNaam(int thuis, int ronde) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
+		preparedStatement = connect.prepareStatement("SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE thuisploeg = ? AND datum = ?");
+		preparedStatement.setInt(1, thuis);
+        preparedStatement.setInt(2, ronde);
+        ResultSet rs1  = preparedStatement.executeQuery();
+		ArrayList<Integer> progArray = new ArrayList<Integer>();
+		while (rs1.next()) {
+			progArray.add(rs1.getInt("wedstrijd_id"));
+
+		}
+
+		return progArray;
+
+	}
+   
 	@Override
 	public ArrayList<ProgrammaPOJO> findProgramma(int i) throws SQLException {
 		// TODO Auto-generated method stub

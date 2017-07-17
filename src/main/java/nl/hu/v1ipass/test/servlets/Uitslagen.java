@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.ProgrammaDAOImpl;
+import POJO.ProgrammaPOJO;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Uitslagen.java")
@@ -17,6 +20,7 @@ public class Uitslagen extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
 		
  String thuis = req.getParameter("thuis");
  String ronde = req.getParameter("ronde");
@@ -27,13 +31,29 @@ public class Uitslagen extends HttpServlet {
  int ronde1 = Integer.parseInt(ronde);
  int dpthuis1 = Integer.parseInt(dpthuis);
  int dpuit1 = Integer.parseInt(dpuit);
+ 
+
+
+
+
 
 
  
  
+ int programmaID = (Integer) null;
 
  try {
-		dao.UitslagDoorgevenProg(thuis1, ronde1, dpthuis1, dpuit1);
+	 ArrayList<Integer> prog = progdao.findIdFromNaam(thuis1, ronde1);
+	 for (int n : prog){
+	 	programmaID = n;
+	 	
+	 }
+	 //Dit is een object prog
+	  	ProgrammaPOJO programma = progdao.findProgrammaFromId(programmaID);
+	  	programma.setDoelpuntenthuis(dpthuis1);
+	  	programma.setDoelpuntenuit(dpuit1);
+
+		progdao.UitslagDoorgevenProg(programma);
 		dao.UitslagDoorgevenTeamsThuis(thuis1, ronde1, dpthuis1, dpuit1);
 		dao.UitslagDoorgevenTeamsUit(dao.getUitploeg(thuis1, ronde1), ronde1, dpthuis1, dpuit1);
 		} catch (Exception e) {

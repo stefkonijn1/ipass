@@ -39,7 +39,7 @@ public class TeamDAOImpl implements TeamDAO {
 		ArrayList<ProgrammaPOJO> progArray = new ArrayList<ProgrammaPOJO>();
 		ProgrammaDAOImpl nd = new ProgrammaDAOImpl();
 		while (res2.next()) {
-			ProgrammaPOJO prog = new ProgrammaPOJO(res2.getInt("wedstrijd_id"), res2.getInt("datum"),res2.getInt("thuisploeg"),res2.getInt("uitploeg"),res2.getInt("doelpunten_t"),res2.getInt("doelpunten_u"),res2.getInt("competitie"));
+			ProgrammaPOJO prog = new ProgrammaPOJO(res2.getInt("datum"),res2.getInt("thuisploeg"),res2.getInt("uitploeg"),res2.getInt("doelpunten_t"),res2.getInt("doelpunten_u"),res2.getInt("competitie"));
 			prog.setTeams(nd.getTeamsFromProgramma(res2.getInt("id")));
 			progArray.add(prog);
 		}

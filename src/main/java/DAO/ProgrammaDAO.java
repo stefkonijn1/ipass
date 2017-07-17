@@ -34,6 +34,12 @@ public interface ProgrammaDAO {
 
 
 	ResultSet Stand(int comp) throws Exception;
+
+
+	void UitslagDoorgevenProg(ProgrammaPOJO prog) throws Exception;
+
+
+	ArrayList<Integer> findIdFromNaam(int thuis, int ronde) throws SQLException;
 	
 
 

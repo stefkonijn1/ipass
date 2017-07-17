@@ -25,8 +25,7 @@ public class ProgrammaPOJO {
 	public ProgrammaPOJO(){
 			
 	   }
-	   public ProgrammaPOJO(int id, int ronde,int thuis, int uit, int doelpuntenthuis,int doelpuntenuit, int competitie){
-	   	this.id = id;
+	   public ProgrammaPOJO( int ronde,int thuis, int uit, int doelpuntenthuis,int doelpuntenuit, int competitie){
 	   	this.ronde = ronde;
 	   	this.thuis = thuis;
 	   	this.uit = uit;
