@@ -9,27 +9,27 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.ProgrammaDAOImpl;
+import DAO.TeamDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/ProgrammaClub.java")
 
 public class ProgrammaClub extends HttpServlet {
- protected void doGet(HttpServletRequest req, HttpServletResponse resp)
- throws ServletException, IOException {
-		Codes dao = new Codes();
-		
- String comp = req.getParameter("comp");
- String ronde = req.getParameter("ronde");
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			 throws ServletException, IOException {
+					ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
+					TeamDAOImpl teamdao = new TeamDAOImpl();
+					
+			 String comp = req.getParameter("comp");
+			 String ronde = req.getParameter("ronde");
 
- int comp1 = Integer.parseInt(comp);
- int ronde1 = Integer.parseInt(ronde);
+			 int comp1 = Integer.parseInt(comp);
+			 int ronde1 = Integer.parseInt(ronde);
 
 
- 
- 
-
-try {
-	ResultSet result = dao.Prog(comp1, ronde1);
+			try {
+				ResultSet result = progdao.Prog(comp1, ronde1);
 
  
 
@@ -54,8 +54,8 @@ while(result.next()){
 	i=i+1;
 out.println("<tr>"
           + "<td><center>"+result.getInt("datum")+"</center></td>"
-          		+ "<td><center>"+dao.naamthuis(result.getInt("Thuisploeg"))+"</center></td>"
-          		+ "<td><center>"+dao.naamuit(result.getInt("Uitploeg"))+"</center></td>"
+          		+ "<td><center>"+teamdao.naamthuis(result.getInt("Thuisploeg"))+"</center></td>"
+          		+ "<td><center>"+teamdao.naamuit(result.getInt("Uitploeg"))+"</center></td>"
           		+ "<td><center>"+result.getInt("Doelpunten_T")+"</center></td>"
           		+ "<td><center>"+result.getInt("Doelpunten_U")+"</center></td>"
           		+ "</tr>");

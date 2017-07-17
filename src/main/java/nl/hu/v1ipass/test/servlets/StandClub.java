@@ -9,23 +9,24 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.ProgrammaDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/StandClub.java")
 
 public class StandClub extends HttpServlet {
- protected void doGet(HttpServletRequest req, HttpServletResponse resp)
- throws ServletException, IOException {
-		Codes dao = new Codes();
-		
- String id = req.getParameter("comp");
- int id1 = Integer.parseInt(id);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			 throws ServletException, IOException {
+					ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
+					
+			 String id = req.getParameter("comp");
+			 int id1 = Integer.parseInt(id);
 
 
- 
-try {
-	ResultSet result = dao.Stand(id1);
+			try {
+				ResultSet result = progdao.Stand(id1);
 
+			 
  
 
  PrintWriter out = resp.getWriter();

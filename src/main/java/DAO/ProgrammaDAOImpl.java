@@ -96,6 +96,27 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return rs2;
 
     }
+    @Override
+    public ResultSet Stand(int comp) throws Exception {
+        ResultSet rs1 = null;
+
+        try {
+        	Connection connect = null;
+        	connect = getConnection();
+        	
+            statement = connect.createStatement();
+            preparedStatement = connect.prepareStatement("SELECT * FROM TEAMS WHERE klasse = ? ORDER BY punten DESC;");
+            preparedStatement.setInt(1, comp);
+            rs1  = preparedStatement.executeQuery();
+
+            connect.close();
+
+        } catch (Exception e) {
+            throw e;
+        } 
+		return rs1;
+
+    }
 
 	@Override
 	public ArrayList<ProgrammaPOJO> findProgramma(int i) throws SQLException {

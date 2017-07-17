@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.ProgrammaDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Standen.java")
@@ -16,14 +17,14 @@ import nl.hu.v1ipass.test.servlets.Codes;
 public class Standen extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		Codes dao = new Codes();
+		ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
 		
  String id = req.getParameter("comp");
  int id1 = Integer.parseInt(id);
 
 
 try {
-	ResultSet result = dao.Stand(id1);
+	ResultSet result = progdao.Stand(id1);
 
  
 

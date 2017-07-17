@@ -18,7 +18,6 @@ import nl.hu.v1ipass.test.servlets.Codes;
 public class Programma extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		Codes dao = new Codes();
 		ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
 		TeamDAOImpl teamdao = new TeamDAOImpl();
 		

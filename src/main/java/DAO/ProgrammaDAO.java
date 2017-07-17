@@ -31,6 +31,9 @@ public interface ProgrammaDAO {
 
 
 	ResultSet Prog(int comp, int ronde) throws Exception;
+
+
+	ResultSet Stand(int comp) throws Exception;
 	
 
 
