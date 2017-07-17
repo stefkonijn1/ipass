@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.LidDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/DeleteLid.java")
@@ -17,6 +18,8 @@ public class DeleteLid extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		LidDAOImpl liddao = new LidDAOImpl();
+
 		
  String id = req.getParameter("team");
  int id1 = Integer.parseInt(id);
@@ -24,7 +27,7 @@ public class DeleteLid extends HttpServlet {
  
  
  try {
-	dao.DeleteLid(id1);
+	liddao.DeleteLid(liddao.findLid(id1));
 } catch (Exception e) {
 	e.printStackTrace();
 }
