@@ -9,21 +9,20 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import nl.hu.v1ipass.test.servlets.Codes;
+import DAO.ClubDAOImpl;
 
 @WebServlet(urlPatterns = "/Club.java")
 
 public class Club extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		Codes dao = new Codes();
-		
+	 ClubDAOImpl clubdao = new ClubDAOImpl();		
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
  
  try {
-		ResultSet result = dao.ControleerClub(user, pasw);
+		ResultSet result = clubdao.ControleerClub(user, pasw);
 		while(result.next()){
 			if (result.getString("Clubnaam").equals(user)){
 				

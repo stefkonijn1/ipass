@@ -21,6 +21,8 @@ public interface TeamDAO {
 
 	String naamuit(int uit) throws Exception;
 
+	int findIdFromNaam(int naam) throws SQLException;
+
 
 
 

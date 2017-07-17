@@ -13,14 +13,12 @@ import DAO.LidDAOImpl;
 import DAO.TeamDAOImpl;
 import POJO.LidPOJO;
 import POJO.TeamPOJO;
-import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/AddTeam.java")
 
 public class AddTeam extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		Codes dao = new Codes();
 		TeamDAOImpl teamdao = new TeamDAOImpl();
 
 		

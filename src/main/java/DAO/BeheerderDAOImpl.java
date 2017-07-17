@@ -22,12 +22,17 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 
     @Override
 	public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
+		ResultSet rs = null; 
+
 		try {
-			ResultSet rs = null; 
+			
         	Connection connect = null;
         	connect = getConnection();
+        	
 	        statement = connect.createStatement();
-	        preparedStatement = connect.prepareStatement("SELECT Naam FROM Beheerders WHERE Password = ?");
+	        preparedStatement = connect.prepareStatement("SELECT naam FROM beheerders WHERE password = ?");
+	        
+	        System.out.println(pasw);
 	        preparedStatement.setString(1, pasw);
 
 	        rs  = preparedStatement.executeQuery();

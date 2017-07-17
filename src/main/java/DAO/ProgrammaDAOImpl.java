@@ -32,6 +32,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		while (res.next()) {
 			prog = new ProgrammaPOJO(res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
 		}
+		System.out.println(prog);
 		return prog;
 		}
     @Override
@@ -56,7 +57,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 	public ArrayList<String> getTeamsFromProgramma(int id) throws SQLException {
     	Connection connect = null;
     	connect = getConnection();
-		String queryString = "SELECT team.teamnaam FROM teams, team_programma, programma WHERE team_programma.team = team.teamcode AND programma.wedstrijd_id = "+id;
+		String queryString = "SELECT teams.teamnaam FROM teams, team_programma, programma WHERE team_programma.team = teams.teamcode AND programma.wedstrijd_id = "+id;
 				
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		ArrayList<String> ar = new ArrayList<String>();
@@ -134,15 +135,14 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         	
             
 
-          preparedStatement = connect.prepareStatement("UPDATE PROGRAMMA SET Doelpunten_T = ?, Doelpunten_U = ? WHERE Thuisploeg = ? AND datum = ?;");
+          preparedStatement = connect.prepareStatement("UPDATE PROGRAMMA SET Doelpunten_T = ?, Doelpunten_U = ? WHERE wedstrijd_id = ?;");
         preparedStatement.setInt(1, prog.getDoelpuntenthuis());
         preparedStatement.setInt(2, prog.getDoelpuntenuit());
-        preparedStatement.setInt(3, prog.getCompetitie());
-        preparedStatement.setInt(4, prog.getRonde());
+        preparedStatement.setInt(3, prog.getId());
+
         preparedStatement.executeUpdate();
         
 
-          System.out.println("Gelukt!");
 
           connect.close();
 
@@ -155,26 +155,196 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     }
     @Override
     public int findIdFromNaam(int thuis, int ronde) throws SQLException {
-    	int programmaID = 0;
+    	int id = 90;
     	Connection connect = null;
     	connect = getConnection();
 		preparedStatement = connect.prepareStatement("SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE thuisploeg = ? AND datum = ?");
 		preparedStatement.setInt(1, thuis);
         preparedStatement.setInt(2, ronde);
         ResultSet rs1  = preparedStatement.executeQuery();
-		ArrayList<Integer> progArray = new ArrayList<Integer>();
-//		while (rs1.next()) {
-//			int id = (rs1.getInt("wedstrijd_id"));
-//		}
-// 
-		int id = (Integer) null;
-		for (int n : progArray){
-		 	 return programmaID += n;}
-		return  id = (rs1.getInt("wedstrijd_id"));
+        while(rs1.next()){
+         id = (rs1.getInt("wedstrijd_id"));
+        }
+        System.out.println(id);
+		return id;
+		
 
-
+    
 	}
-   
+    @Override
+    public void UitslagDoorgevenTeamsThuis(ProgrammaPOJO prog) throws Exception {
+        try {
+        	Connection connect = null;
+        	connect = getConnection();
+        	int winnaar = 0;
+            if (prog.getDoelpuntenthuis()>prog.getDoelpuntenuit()){
+            	winnaar = 1;
+            }
+            else if (prog.getDoelpuntenuit()>prog.getDoelpuntenthuis()){
+            	winnaar = 2;
+            }
+            else if (prog.getDoelpuntenthuis() == prog.getDoelpuntenuit()){
+            	winnaar = 3;
+            }
+TeamDAOImpl teamdao = new TeamDAOImpl();
+//thuis
+
+
+TeamPOJO team = teamdao.findTeam(prog.getThuis());
+System.out.println(team.toString());
+System.out.println(team.getTeamcode());
+System.out.println("tste");
+int gespeeld = team.getGespeeld();
+System.out.println(gespeeld);
+int gewonnen = team.getGewonnen();
+int gelijk = team.getGelijk();
+int verloren = team.getVerloren();
+int punten = team.getPunten();
+System.out.println(punten);
+int dpv = team.getDoelpuntenvoor();
+int dpt = team.getDoelpuntentegen();
+preparedStatement = connect.prepareStatement("UPDATE TEAMS SET gespeelde_wedstrijden = ?, gewonnen = ?, gelijk = ?, verloren = ?, punten = ?, Doelpunten_V = ?, Doelpunten_T = ? WHERE teamcode = ? ");
+gespeeld = gespeeld + 1;
+preparedStatement.setInt(1, gespeeld);
+
+if (winnaar == 1){
+        	gewonnen = gewonnen + 1;
+        	punten = punten + 3;
+            preparedStatement.setInt(2, gewonnen);
+            preparedStatement.setInt(3, gelijk);
+            preparedStatement.setInt(4, verloren);
+            preparedStatement.setInt(5, punten);
+        }
+        else if (winnaar == 2){
+        	verloren = verloren + 1;
+        	
+            preparedStatement.setInt(2, gewonnen);
+            preparedStatement.setInt(3, gelijk);
+            preparedStatement.setInt(4, verloren);
+            preparedStatement.setInt(5, punten);
+        }
+        else if (winnaar == 3){
+        	gelijk = gelijk + 1;
+        	punten = punten + 1;
+        	
+            preparedStatement.setInt(2, gewonnen);
+            preparedStatement.setInt(3, gelijk);
+            preparedStatement.setInt(4, verloren);
+            preparedStatement.setInt(5, punten);
+        }
+        dpv = dpv + prog.getDoelpuntenthuis();
+        dpt = dpt + prog.getDoelpuntenuit();
+        preparedStatement.setInt(6, dpv);
+        preparedStatement.setInt(7, dpt);
+        preparedStatement.setInt(8, team.getTeamcode());
+
+
+        preparedStatement.executeUpdate();
+        
+
+          System.out.println("Gelukt!");
+          connect.close();
+
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+        }
+
+    }
+    @Override
+    public void UitslagDoorgevenTeamsUit(ProgrammaPOJO prog) throws Exception {
+        try {
+        	Connection connect = null;
+        	connect = getConnection();
+            int winnaar = 0;
+            if (prog.getDoelpuntenthuis()>prog.getDoelpuntenuit()){
+            	winnaar = 1;
+            }
+            else if (prog.getDoelpuntenuit()>prog.getDoelpuntenthuis()){
+            	winnaar = 2;
+            }
+            else if (prog.getDoelpuntenthuis() == prog.getDoelpuntenuit()){
+            	winnaar = 3;
+            }
+            
+
+            TeamDAOImpl teamdao = new TeamDAOImpl();
+          //thuis
+
+
+          TeamPOJO team = teamdao.findTeam(prog.getUit());
+          System.out.println("tste");
+          int gespeeld = team.getGespeeld();
+          System.out.println(gespeeld);
+          int gewonnen = team.getGewonnen();
+          int gelijk = team.getGelijk();
+          int verloren = team.getVerloren();
+          int punten = team.getPunten();
+          System.out.println(punten);
+          int dpv = team.getDoelpuntenvoor();
+          int dpt = team.getDoelpuntentegen();
+            preparedStatement = connect.prepareStatement("UPDATE TEAMS SET Gespeelde_wedstrijden = ?, gewonnen = ?, gelijk = ?, verloren = ?, punten = ?, Doelpunten_V = ?, Doelpunten_T = ? WHERE teamcode = ? ");
+            gespeeld = gespeeld + 1;
+
+            
+            preparedStatement.setInt(1, gespeeld);
+            if (winnaar == 1){
+                    	verloren = verloren + 1;
+
+                        preparedStatement.setInt(2, gewonnen);
+                        preparedStatement.setInt(3, gelijk);
+                        preparedStatement.setInt(4, verloren);
+                        preparedStatement.setInt(5, punten);
+                        dpv = dpv + prog.getDoelpuntenuit();
+                        dpt = dpt + prog.getDoelpuntenthuis();
+                        preparedStatement.setInt(6, dpv);
+                        preparedStatement.setInt(7, dpt);
+                        preparedStatement.setInt(8, team.getTeamcode());
+                    }
+                    else if (winnaar == 2){
+                    	gewonnen = gewonnen + 1;
+                    	punten = punten + 3;
+                        preparedStatement.setInt(2, gewonnen);
+                        preparedStatement.setInt(3, gelijk);
+                        preparedStatement.setInt(4, verloren);
+                        preparedStatement.setInt(5, punten);
+                        dpv = dpv + prog.getDoelpuntenuit();
+                        dpt = dpt + prog.getDoelpuntenthuis();
+                        preparedStatement.setInt(6, dpv);
+                        preparedStatement.setInt(7, dpt);
+                        preparedStatement.setInt(8, team.getTeamcode());
+                    }
+                    else if (winnaar == 3){
+                    	gelijk = gelijk + 1;
+                    	punten = punten + 1;
+                    	
+                        preparedStatement.setInt(2, gewonnen);
+                        preparedStatement.setInt(3, gelijk);
+                        preparedStatement.setInt(4, verloren);
+                        preparedStatement.setInt(5, punten);
+                        dpv = dpv + prog.getDoelpuntenuit();
+                        dpt = dpt + prog.getDoelpuntenthuis();
+                        preparedStatement.setInt(6, dpv);
+                        preparedStatement.setInt(7, dpt);
+                        preparedStatement.setInt(8, team.getTeamcode());
+                    }
+
+
+
+                    preparedStatement.executeUpdate();
+                    
+
+                      System.out.println("Gelukt!");
+                      connect.close();
+
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+        }
+
+    }
 	@Override
 	public ArrayList<ProgrammaPOJO> findProgramma(int i) throws SQLException {
 		// TODO Auto-generated method stub
@@ -192,4 +362,6 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 }

@@ -9,24 +9,25 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import nl.hu.v1ipass.test.servlets.Codes;
+import DAO.BeheerderDAOImpl;
 
 @WebServlet(urlPatterns = "/Beheerder.java")
 
 public class Beheerder extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		Codes dao = new Codes();
-		
+BeheerderDAOImpl behdao = new BeheerderDAOImpl();		
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
 
  try {
-		ResultSet result = dao.ControleerBeheerder(user, pasw);
+
+		ResultSet result = behdao.ControleerBeheerder(user, pasw);
 		while(result.next()){
-			if (result.getString("Naam").equals(user)){
+			if (result.getString("naam").equals(user)){
 				
+					
 			
 				
 	 PrintWriter out = resp.getWriter();

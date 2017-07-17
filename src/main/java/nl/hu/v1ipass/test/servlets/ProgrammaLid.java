@@ -11,7 +11,6 @@ import javax.servlet.http.*;
 
 import DAO.ProgrammaDAOImpl;
 import DAO.TeamDAOImpl;
-import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/ProgrammaLid.java")
 

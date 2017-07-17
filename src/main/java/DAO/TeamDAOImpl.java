@@ -33,21 +33,46 @@ public class TeamDAOImpl implements TeamDAO {
 		TeamPOJO team = new TeamPOJO();
 		while (res.next()) {
 			team = new TeamPOJO(res.getString("teamnaam"), res.getInt("klasse"));
+			team.setTeamcode(res.getInt("teamcode"));
+			team.setGespeeld(res.getInt("gespeelde_wedstrijden"));
+			team.setGewonnen(res.getInt("gewonnen"));
+			team.setGelijk(res.getInt("gelijk"));
+			team.setVerloren(res.getInt("verloren"));
+			team.setPunten(res.getInt("punten"));
+			team.setDoelpuntenvoor(res.getInt("doelpunten_v"));
+			team.setDoelpuntentegen(res.getInt("doelpunten_t"));
+			team.setClubid(res.getInt("club_id"));
 					}
-		String queryString2 = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, team WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND team.teamcode = team_programma.team AND team_programma.team = "	+ teamcode;
+		String queryString2 = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, teams WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND teams.teamcode = team_programma.team AND team_programma.team = "	+ teamcode;
 		ResultSet res2 = getConnection().prepareStatement(queryString2).executeQuery();
 		ArrayList<ProgrammaPOJO> progArray = new ArrayList<ProgrammaPOJO>();
 		ProgrammaDAOImpl nd = new ProgrammaDAOImpl();
 		while (res2.next()) {
 			ProgrammaPOJO prog = new ProgrammaPOJO(res2.getInt("datum"),res2.getInt("thuisploeg"),res2.getInt("uitploeg"),res2.getInt("doelpunten_t"),res2.getInt("doelpunten_u"),res2.getInt("competitie"));
-			prog.setTeams(nd.getTeamsFromProgramma(res2.getInt("id")));
+			prog.setTeams(nd.getTeamsFromProgramma(res2.getInt("wedstrijd_id")));
 			progArray.add(prog);
 		}
 		team.setProgramma(progArray);
 		
 		return team;
     }
+    @Override
+    public int findIdFromNaam(int naam) throws SQLException {
+    	int id = 90;
+    	Connection connect = null;
+    	connect = getConnection();
+		preparedStatement = connect.prepareStatement("SELECT teamcode from teams where teamnaam = ?");
+		preparedStatement.setInt(1, naam);
+        ResultSet rs1  = preparedStatement.executeQuery();
+        while(rs1.next()){
+         id = (rs1.getInt("teamcode"));
+        }
+        System.out.println(id);
+		return id;
 		
+
+    
+	}
 	@Override
 	public void AddTeam(TeamPOJO team) throws Exception {
         try {

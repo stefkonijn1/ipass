@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.ProgrammaDAOImpl;
-import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/StandLid.java")
 

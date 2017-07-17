@@ -42,6 +42,7 @@ public class TeamPOJO {
 	public String getTeamnaam() {
 		return teamnaam;
 	}
+	
 	public void setTeamnaam(String teamnaam) {
 		this.teamnaam = teamnaam;
 	}
@@ -98,5 +99,12 @@ public class TeamPOJO {
 	}
 	public void setClubid(int clubid) {
 		this.clubid = clubid;
+	}
+	@Override
+	public String toString() {
+		return "TeamPOJO [teamcode=" + teamcode + ", teamnaam=" + teamnaam + ", klasse=" + klasse + ", gespeeld="
+				+ gespeeld + ", gewonnen=" + gewonnen + ", gelijk=" + gelijk + ", verloren=" + verloren + ", punten="
+				+ punten + ", doelpuntenvoor=" + doelpuntenvoor + ", doelpuntentegen=" + doelpuntentegen + ", clubid="
+				+ clubid + ", programma=" + programma + "]";
 	}
 }

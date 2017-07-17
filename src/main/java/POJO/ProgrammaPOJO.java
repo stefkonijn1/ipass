@@ -48,6 +48,7 @@ public class ProgrammaPOJO {
 	public void setRonde(int ronde) {
 		this.ronde = ronde;
 	}
+	
 	public int getThuis() {
 		return thuis;
 	}
@@ -78,6 +79,11 @@ public class ProgrammaPOJO {
 	public void setCompetitie(int competitie) {
 		this.competitie = competitie;
 	}
-
+	@Override
+	public String toString() {
+		return "ProgrammaPOJO [id=" + id + ", ronde=" + ronde + ", thuis=" + thuis + ", uit=" + uit
+				+ ", doelpuntenthuis=" + doelpuntenthuis + ", doelpuntenuit=" + doelpuntenuit + ", competitie="
+				+ competitie + ", teams=" + teams + "]";
+	}
 
 }

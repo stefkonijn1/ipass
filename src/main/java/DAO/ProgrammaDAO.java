@@ -40,6 +40,12 @@ public interface ProgrammaDAO {
 
 
 	int findIdFromNaam(int thuis, int ronde) throws SQLException;
+
+
+	void UitslagDoorgevenTeamsThuis(ProgrammaPOJO s) throws Exception;
+
+
+	void UitslagDoorgevenTeamsUit(ProgrammaPOJO prog) throws Exception;
 	
 
 

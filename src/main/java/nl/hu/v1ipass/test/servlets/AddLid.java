@@ -11,14 +11,12 @@ import javax.servlet.http.*;
 
 import DAO.LidDAOImpl;
 import POJO.LidPOJO;
-import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/AddLid.java")
 
 public class AddLid extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		Codes dao = new Codes();
 		LidDAOImpl liddao = new LidDAOImpl();
 		
  String naam = req.getParameter("naam");
