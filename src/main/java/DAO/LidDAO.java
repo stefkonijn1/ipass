@@ -27,6 +27,10 @@ public interface LidDAO {
 
 
 
+	void DeleteLid(int id) throws Exception;
+
+
+
 
 
 

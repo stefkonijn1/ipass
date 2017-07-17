@@ -70,14 +70,14 @@ public class LidDAOImpl implements LidDAO {
 
     }
 	@Override
-	public void DeleteLid(LidPOJO lid) throws Exception {
+	public void DeleteLid(int id) throws Exception {
         try {
         	Connection connect = null;
         	connect = getConnection();
             
 
           preparedStatement = connect.prepareStatement("DELETE FROM LEDEN WHERE Lid_id = ?;");
-        preparedStatement.setInt(1, lid.getId());
+        preparedStatement.setInt(1, id);
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
@@ -100,6 +100,13 @@ public class LidDAOImpl implements LidDAO {
 
 	@Override
 	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void DeleteLid(LidPOJO lid) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
