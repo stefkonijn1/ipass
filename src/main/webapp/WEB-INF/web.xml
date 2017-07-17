@@ -10,7 +10,7 @@
  </servlet>
  <servlet-mapping>
  <servlet-name>Dynamic Example Servlet</servlet-name>
- <url-pattern>/DynamicServlet.do</url-pattern>
+ <url-pattern>/DynamicServlet.java</url-pattern>
  </servlet-mapping>
  <servlet>
  <servlet-name>Jersey REST Service</servlet-name>

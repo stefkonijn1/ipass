@@ -163,14 +163,15 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         preparedStatement.setInt(2, ronde);
         ResultSet rs1  = preparedStatement.executeQuery();
 		ArrayList<Integer> progArray = new ArrayList<Integer>();
-		while (rs1.next()) {
-			progArray.add(rs1.getInt("wedstrijd_id"));
-		}
+//		while (rs1.next()) {
+//			int id = (rs1.getInt("wedstrijd_id"));
+//		}
+// 
+		int id = (Integer) null;
 		for (int n : progArray){
-		 	 programmaID += n;
-		 	
-		 }
-		return programmaID;
+		 	 return programmaID += n;}
+		return  id = (rs1.getInt("wedstrijd_id"));
+
 
 	}
    
