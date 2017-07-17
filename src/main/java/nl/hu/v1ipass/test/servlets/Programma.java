@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.ProgrammaDAOImpl;
+import POJO.ProgrammaPOJO;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Programma.java")
@@ -17,6 +20,7 @@ public class Programma extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
 		
  String comp = req.getParameter("comp");
  String ronde = req.getParameter("ronde");
@@ -26,7 +30,8 @@ public class Programma extends HttpServlet {
 
 
 try {
-	ResultSet result = dao.Prog(comp1, ronde1);
+	ArrayList<Integer> wedstrijden = progdao.findProgrammaTeam(comp1);
+	ArrayList<ProgrammaPOJO> prog = progdao.findProgramma(wedstrijden);
 
  
 
@@ -48,17 +53,17 @@ try {
  out.println("  <li><a href='lid1.html'>Lid toevoegen</a></li>");
  out.println("  <li><a href='lid2.html'>Lid Verwijderen</a></li>");
  out.println("</ul>");
- out.println(" <h1>Het programma van competitie "+ comp +" op speeldag "+ronde+ "</h1>");
+ out.println(" <h1>Het programma van competitie "+ comp + "</h1>");
  out.println("<table BORDER=1 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>"+"<tr> <th>Ronde</th> <th>Thuis</th>  <th>Uit</th> <th>DpThuis</th> <th>Dpuit</th> </tr>");
 int i = 0;
-while(result.next()){
+for(ProgrammaPOJO n : prog){
 	i=i+1;
 out.println("<tr>"
-          + "<td><center>"+result.getInt("datum")+"</center></td>"
-          		+ "<td><center>"+dao.naamthuis(result.getInt("Thuisploeg"))+"</center></td>"
-          		+ "<td><center>"+dao.naamuit(result.getInt("Uitploeg"))+"</center></td>"
-          		+ "<td><center>"+result.getInt("Doelpunten_T")+"</center></td>"
-          		+ "<td><center>"+result.getInt("Doelpunten_U")+"</center></td>"
+          + "<td><center>"+n.getRonde()+"</center></td>"
+          		+ "<td><center>"+dao.naamthuis(n.getThuis())+"</center></td>"
+          		+ "<td><center>"+dao.naamuit(n.getUit())+"</center></td>"
+          		+ "<td><center>"+n.getDoelpuntenthuis()+"</center></td>"
+          		+ "<td><center>"+n.getDoelpuntenuit()+"</center></td>"
           		+ "</tr>");
 }
 out.println("</table>");
