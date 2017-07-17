@@ -104,7 +104,59 @@ public class TeamDAOImpl implements TeamDAO {
             }        }
 
     }
+	public String naamthuis(int thuis) throws Exception{
+		 ResultSet rs3 = null;
 
+			try {
+				 
+				Connection connect = null;
+		    	connect = getConnection(); 
+	        statement = connect.createStatement();
+	        preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
+	        preparedStatement.setInt(1, thuis);
+	        rs3  = preparedStatement.executeQuery();
+	        connect.close();
+
+	        String str = "";
+	        while (rs3.next()) {
+	             str = rs3.getString("Teamnaam");
+	                      }
+	               return str;
+	        
+	        
+	    } catch (Exception e) {
+	        throw e;
+	    } 
+
+	}
+	@Override
+	public String naamuit(int uit) throws Exception{
+		
+		 ResultSet rs3 = null;
+
+		try {
+			 
+			Connection connect = null;
+	    	connect = getConnection();
+
+	        statement = connect.createStatement();
+	        preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
+	        preparedStatement.setInt(1, uit);
+	        rs3  = preparedStatement.executeQuery();
+	        connect.close();
+
+	        String str = "";
+	        while (rs3.next()) {
+	             str = rs3.getString("Teamnaam");
+	                      }
+	               return str;
+	        
+	        
+	    } catch (Exception e) {
+	        throw e;
+	    } 
+
+	}
 	@Override
 	public void close() {
 		// TODO Auto-generated method stub

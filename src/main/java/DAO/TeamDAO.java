@@ -19,6 +19,8 @@ public interface TeamDAO {
 
 	void DeleteTeam(int teamcode) throws Exception;
 
+	String naamuit(int uit) throws Exception;
+
 
 
 

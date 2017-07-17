@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.ProgrammaDAOImpl;
+import DAO.TeamDAOImpl;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/Programma.java")
@@ -19,6 +20,7 @@ public class Programma extends HttpServlet {
  throws ServletException, IOException {
 		Codes dao = new Codes();
 		ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
+		TeamDAOImpl teamdao = new TeamDAOImpl();
 		
  String comp = req.getParameter("comp");
  String ronde = req.getParameter("ronde");
@@ -57,8 +59,8 @@ while(result.next()){
 	i=i+1;
 out.println("<tr>"
           + "<td><center>"+result.getInt("datum")+"</center></td>"
-          		+ "<td><center>"+dao.naamthuis(result.getInt("Thuisploeg"))+"</center></td>"
-          		+ "<td><center>"+dao.naamuit(result.getInt("Uitploeg"))+"</center></td>"
+          		+ "<td><center>"+teamdao.naamthuis(result.getInt("Thuisploeg"))+"</center></td>"
+          		+ "<td><center>"+teamdao.naamuit(result.getInt("Uitploeg"))+"</center></td>"
           		+ "<td><center>"+result.getInt("Doelpunten_T")+"</center></td>"
           		+ "<td><center>"+result.getInt("Doelpunten_U")+"</center></td>"
           		+ "</tr>");
