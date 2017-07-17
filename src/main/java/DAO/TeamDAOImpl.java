@@ -29,8 +29,8 @@ public class TeamDAOImpl implements TeamDAO {
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		TeamPOJO team = new TeamPOJO();
 		while (res.next()) {
-			team = new TeamPOJO(res.getInt("teamcode"), res.getString("teamnaam"), res.getInt("klasse"), res.getInt("gespeeld"), res.getInt("gewonnen"), res.getInt("gelijk"), res.getInt("verloren"), res.getInt("punten"), res.getInt("doelpunten_v"), res.getInt("doelpunten_t"), res.getInt("club_id"));
-		}
+			team = new TeamPOJO(res.getString("teamnaam"), res.getInt("klasse"));
+					}
 		
 		return team;
     }
@@ -65,14 +65,14 @@ public class TeamDAOImpl implements TeamDAO {
 
     }
 	@Override
-	public void DeleteTeam(TeamPOJO team) throws Exception {
+	public void DeleteTeam(int teamcode) throws Exception {
         try {
         	Connection connect = null;
         	connect = getConnection();
             
 
           preparedStatement = connect.prepareStatement("DELETE FROM TEAMS WHERE TEAMCODE = ?;");
-        preparedStatement.setInt(1, team.getTeamcode());
+        preparedStatement.setInt(1, teamcode);
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
@@ -94,6 +94,13 @@ public class TeamDAOImpl implements TeamDAO {
 
 	@Override
 	public void close() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void DeleteTeam(TeamPOJO team) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

@@ -9,6 +9,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.LidDAOImpl;
+import DAO.TeamDAOImpl;
+import POJO.LidPOJO;
+import POJO.TeamPOJO;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/AddTeam.java")
@@ -17,16 +21,21 @@ public class AddTeam extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		TeamDAOImpl teamdao = new TeamDAOImpl();
+
 		
  String naam = req.getParameter("team");
  String klasse = req.getParameter("klasse");
  
  int klasse1 = Integer.parseInt(klasse);
+ 
+ TeamPOJO team = new TeamPOJO(naam, klasse1);
+
 
  
  
  try {
-	dao.AddTeam(naam, klasse1);
+	teamdao.AddTeam(team);
 } catch (Exception e) {
 	e.printStackTrace();
 }

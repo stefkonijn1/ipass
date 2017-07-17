@@ -17,6 +17,8 @@ public interface TeamDAO {
 	
 	void close();
 
+	void DeleteTeam(int teamcode) throws Exception;
+
 
 
 

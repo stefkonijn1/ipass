@@ -16,19 +16,10 @@ public class TeamPOJO {
 	   public TeamPOJO(){
 			
 	   }
-	   public TeamPOJO(int teamcode, String teamnaam,int klasse, int gespeeld, int gewonnen,int gelijk, int verloren, int punten,int doelpuntenvoor, int doelpuntentegen, int clubid){
-	   	this.teamcode = teamcode;
+	   public TeamPOJO(String teamnaam,int klasse){ 
 	   	this.teamnaam = teamnaam;
 	   	this.klasse = klasse;
-	   	this.gespeeld = gespeeld;
-	   	this.gewonnen = gewonnen;
-	   	this.gelijk = gelijk;
-	   	this.verloren = verloren;
-	   	this.punten = punten;
-	   	this.doelpuntenvoor = doelpuntenvoor;
-	   	this.doelpuntentegen = doelpuntentegen;
-	   	this.clubid = clubid;
-
+	   	
 	   }
 
 	public int getTeamcode() {
