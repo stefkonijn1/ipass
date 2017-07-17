@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import DAO.LidDAOImpl;
+import POJO.LidPOJO;
 import nl.hu.v1ipass.test.servlets.Codes;
 
 @WebServlet(urlPatterns = "/AddLid.java")
@@ -17,6 +19,7 @@ public class AddLid extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
 		Codes dao = new Codes();
+		LidDAOImpl liddao = new LidDAOImpl();
 		
  String naam = req.getParameter("naam");
  String achternaam = req.getParameter("achternaam");
@@ -26,12 +29,14 @@ public class AddLid extends HttpServlet {
  
  int team1 = Integer.parseInt(team);
  int leeftijd1 = Integer.parseInt(leeftijd);
+ 
+ LidPOJO lid = new LidPOJO(naam, achternaam, leeftijd1, team1, pasw);
 
 
  
  
  try {
-	dao.AddLid(naam, achternaam, leeftijd1, team1, pasw);
+	liddao.AddLid(lid);
 } catch (Exception e) {
 	e.printStackTrace();
 }

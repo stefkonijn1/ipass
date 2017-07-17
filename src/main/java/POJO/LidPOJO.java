@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package POJO;
 
 public class LidPOJO {
 	
@@ -7,6 +7,19 @@ public class LidPOJO {
 	   private String achternaam;
 	   private int leeftijd;
 	   private int teamcode;
+	   private String pasw;
+	   
+
+public LidPOJO(){
+	
+}
+public LidPOJO( String naam, String achternaam, int leeftijd, int teamcode, String pasw){
+	this.naam = naam;
+	this.achternaam = achternaam;
+	this.leeftijd = leeftijd;
+	this.teamcode = teamcode;
+}
+
 	public int getId() {
 		return id;
 	}
@@ -36,5 +49,11 @@ public class LidPOJO {
 	}
 	public void setTeamcode(int teamcode) {
 		this.teamcode = teamcode;
+	}
+	public String getPasw() {
+		return pasw;
+	}
+	public void setPasw(String pasw) {
+		this.pasw = pasw;
 	}
 }

@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package POJO;
 
 public class BeheerderPOJO {
 	   private int id;
@@ -6,6 +6,19 @@ public class BeheerderPOJO {
 	   private String Achternaam;
 	   private int leeftijd;
 	   private int clubid;
+	   
+	   public BeheerderPOJO(){
+			
+	   }
+	   public BeheerderPOJO(int id, String naam, String Achternaam, int leeftijd, int clubid){
+	   	this.id = id;
+	   	this.naam = naam;
+	   	this.Achternaam = Achternaam;
+	   	this.leeftijd = leeftijd;
+	   	this.clubid = clubid;
+	   }
+
+	   
 	public int getId() {
 		return id;
 	}
