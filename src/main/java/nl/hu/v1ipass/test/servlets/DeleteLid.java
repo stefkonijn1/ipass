@@ -27,7 +27,7 @@ public class DeleteLid extends HttpServlet {
  
  
  try {
-	liddao.DeleteLid(liddao.findLid(id1));
+	liddao.DeleteLid(id1);
 } catch (Exception e) {
 	e.printStackTrace();
 }
