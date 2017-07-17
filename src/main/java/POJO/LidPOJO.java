@@ -13,6 +13,7 @@ public class LidPOJO {
 public LidPOJO(){
 	
 }
+//Constructor voor lid object
 public LidPOJO( String naam, String achternaam, int leeftijd, int teamcode, String pasw){
 	this.naam = naam;
 	this.achternaam = achternaam;

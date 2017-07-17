@@ -12,14 +12,15 @@ public class BeheerderDAOImpl implements BeheerderDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
+// Functie om de connectie aan te maken
     @Override
 	public Connection getConnection() throws SQLException {
 		Connection conn;
 		conn = ConnectionFactory.getInstance().getConnection();
 		return conn;
 	}
-    private ResultSet rs = null;
-
+    
+// Functie om in te loggen als beheerder
     @Override
 	public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
 		ResultSet rs = null; 

@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,27 +10,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.ProgrammaDAOImpl;
-import DAO.TeamDAOImpl;
 
-@WebServlet(urlPatterns = "/ProgrammaClub.java")
+@WebServlet(urlPatterns = "/StandClub.java")
 
-public class ProgrammaClub extends HttpServlet {
+public class StandClub extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			 throws ServletException, IOException {
 					ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
-					TeamDAOImpl teamdao = new TeamDAOImpl();
-					
-			 String comp = req.getParameter("comp");
-			 String ronde = req.getParameter("ronde");
+//					Gegevens van html page worden opgehaald
 
-			 int comp1 = Integer.parseInt(comp);
-			 int ronde1 = Integer.parseInt(ronde);
+			 String id = req.getParameter("comp");
+			 int id1 = Integer.parseInt(id);
 
 
 			try {
-				ResultSet result = progdao.Prog(comp1, ronde1);
+//				Stand wordt opgehaald uit database
+				ResultSet result = progdao.Stand(id1);
 
- 
+			 
+// Html page wordt aangemaakt
 
  PrintWriter out = resp.getWriter();
  resp.setContentType("text.html");
@@ -46,17 +44,23 @@ public class ProgrammaClub extends HttpServlet {
  out.println("  <li><a href='prog_club.html'>Programmma</a></li>");
  out.println("  <li><a href='uitslag_club.html'>Uitslag doorgeven</a></li>");
  out.println("</ul>");
- out.println(" <h1>Het programma van competitie "+ comp +" op speeldag "+ronde+ "</h1>");
- out.println("<table BORDER=1 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>"+"<tr> <th>Ronde</th> <th>Thuis</th>  <th>Uit</th> <th>DpThuis</th> <th>Dpuit</th> </tr>");
+ out.println(" <h1>De stand van competitie "+ id1 +"</h1>");
+ out.println("<table BORDER=1 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>"+"<tr> <th>Pl</th> <th>Team</th>  <th>GS</th> <th>WN</th> <th>GL</th> <th>VL</th> <th>DV</th><th>DT</th> <th>PN</th></tr>");
 int i = 0;
+// De tabel met de stand wordt hier aangemaakt
 while(result.next()){
 	i=i+1;
 out.println("<tr>"
-          + "<td><center>"+result.getInt("datum")+"</center></td>"
-          		+ "<td><center>"+teamdao.naamthuis(result.getInt("Thuisploeg"))+"</center></td>"
-          		+ "<td><center>"+teamdao.naamuit(result.getInt("Uitploeg"))+"</center></td>"
+		+ "<td><center>"+i+"</center></td>"
+          + "<td><center>"+result.getString("Teamnaam")+"</center></td>"
+          		+ "<td><center>"+result.getInt("Gespeelde_wedstrijden")+"</center></td>"
+          		+ "<td><center>"+result.getInt("Gewonnen")+"</center></td>"
+          		+ "<td><center>"+result.getInt("Gelijk")+"</center></td>"
+          		+ "<td><center>"+result.getInt("Verloren")+"</center></td>"
+          		+ "<td><center>"+result.getInt("Doelpunten_V")+"</center></td>"
           		+ "<td><center>"+result.getInt("Doelpunten_T")+"</center></td>"
-          		+ "<td><center>"+result.getInt("Doelpunten_U")+"</center></td>"
+                + "<td><center>"+result.getInt("Punten")+"</center></td>"
+
           		+ "</tr>");
 }
 out.println("</table>");

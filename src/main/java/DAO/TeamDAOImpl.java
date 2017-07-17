@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 import POJO.ProgrammaPOJO;
 import POJO.TeamPOJO;
-import nl.hu.v1ipass.test.servlets.Programma;
+import Servlets.Programma;
 
 
 public class TeamDAOImpl implements TeamDAO {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    
+// Connectie met database wordt aangemaakt
     @Override
 	public Connection getConnection() throws SQLException {
 		Connection conn;
@@ -25,7 +25,7 @@ public class TeamDAOImpl implements TeamDAO {
 		return conn;
 	}
     
-    
+//    Functie om een teamobject te maken voor een team met een bepaalde teamcode
     @Override
 	public TeamPOJO findTeam(int teamcode) throws SQLException {
 		String queryString = "SELECT * FROM teams WHERE teamcode = " + teamcode;
@@ -56,6 +56,8 @@ public class TeamDAOImpl implements TeamDAO {
 		
 		return team;
     }
+    
+//    Functie om het id van een team te krijgen door middel van de naam
     @Override
     public int findIdFromNaam(int naam) throws SQLException {
     	int id = 90;
@@ -69,10 +71,9 @@ public class TeamDAOImpl implements TeamDAO {
         }
         System.out.println(id);
 		return id;
-		
-
-    
 	}
+    
+//    Functie om een team toe te voegen
 	@Override
 	public void AddTeam(TeamPOJO team) throws Exception {
         try {
@@ -102,6 +103,8 @@ public class TeamDAOImpl implements TeamDAO {
         }
 
     }
+	
+//	Functie om een team te verwijderen
 	@Override
 	public void DeleteTeam(int teamcode) throws Exception {
         try {
@@ -129,6 +132,9 @@ public class TeamDAOImpl implements TeamDAO {
             }        }
 
     }
+	
+//	Functie om de naam van het thuisteam op te halen door middel van het id 
+	@Override
 	public String naamthuis(int thuis) throws Exception{
 		 ResultSet rs3 = null;
 
@@ -154,6 +160,8 @@ public class TeamDAOImpl implements TeamDAO {
 	    } 
 
 	}
+	
+//	Functie om de naam van het uitteam te halen door middel van hte id
 	@Override
 	public String naamuit(int uit) throws Exception{
 		
@@ -180,20 +188,5 @@ public class TeamDAOImpl implements TeamDAO {
 	    } catch (Exception e) {
 	        throw e;
 	    } 
-
 	}
-	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void DeleteTeam(TeamPOJO team) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-	
-
 }

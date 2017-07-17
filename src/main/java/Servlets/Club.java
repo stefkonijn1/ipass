@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,17 +16,19 @@ import DAO.ClubDAOImpl;
 public class Club extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-	 ClubDAOImpl clubdao = new ClubDAOImpl();		
+	 ClubDAOImpl clubdao = new ClubDAOImpl();
+//	 HTML gegevens worden opgehaald
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
  
  try {
+//	 Gegevens worden gecontroleerd
 		ResultSet result = clubdao.ControleerClub(user, pasw);
 		while(result.next()){
 			if (result.getString("Clubnaam").equals(user)){
 				
-			
+//			HTML page wordt gemaakt
 	 PrintWriter out = resp.getWriter();
 	 resp.setContentType("text.html");
 	 out.println("<!DOCTYPE html>");

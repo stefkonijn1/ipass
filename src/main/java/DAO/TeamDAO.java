@@ -12,16 +12,16 @@ public interface TeamDAO {
 
 	void AddTeam(TeamPOJO team) throws Exception;
 	
-	void DeleteTeam(TeamPOJO team) throws Exception;
 
 	
-	void close();
 
 	void DeleteTeam(int teamcode) throws Exception;
 
 	String naamuit(int uit) throws Exception;
 
 	int findIdFromNaam(int naam) throws SQLException;
+
+	String naamthuis(int thuis) throws Exception;
 
 
 

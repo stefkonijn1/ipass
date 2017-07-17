@@ -12,7 +12,6 @@ public interface LidDAO {
 	
 	
 	
-	void close();
 
 
 
@@ -24,7 +23,6 @@ public interface LidDAO {
 
 
 
-	void DeleteLid(LidPOJO lid) throws Exception;
 
 
 

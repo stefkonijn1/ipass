@@ -7,6 +7,7 @@ public class ClubPOJO {
 	   private int id;
 	   private String naam;
 	   private int beheerderid;
+//	   Een lijst met leden en een lijst met teams
 	   private ArrayList<LidPOJO> leden;
 	   private ArrayList<TeamPOJO> teams;
 
@@ -27,13 +28,13 @@ public class ClubPOJO {
 	public ClubPOJO(){
 		
 	}
-	
+//	De constructor voor club objecten
 	public ClubPOJO(int id, String naam, int beheerderid){
 		this.id = id;
 		this.naam = naam;
 		this.beheerderid = beheerderid;
 	}
-	
+//	De getters en setters
 	public int getId() {
 		return id;
 	}

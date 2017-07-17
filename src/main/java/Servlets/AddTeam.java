@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,26 +10,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.LidDAOImpl;
+import DAO.TeamDAOImpl;
+import POJO.LidPOJO;
+import POJO.TeamPOJO;
 
-@WebServlet(urlPatterns = "/DeleteLid.java")
+@WebServlet(urlPatterns = "/AddTeam.java")
 
-public class DeleteLid extends HttpServlet {
+public class AddTeam extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		LidDAOImpl liddao = new LidDAOImpl();
+		TeamDAOImpl teamdao = new TeamDAOImpl();
 
-		
- String id = req.getParameter("team");
- int id1 = Integer.parseInt(id);
+//		Gegevens van de html-page worden opgehaald
+ String naam = req.getParameter("team");
+ String klasse = req.getParameter("klasse");
+ 
+ int klasse1 = Integer.parseInt(klasse);
+ 
+// Er wordt een team object aangemaakt
+ TeamPOJO team = new TeamPOJO(naam, klasse1);
+
 
  
  
  try {
-	liddao.DeleteLid(id1);
+//	 het team object wordt toegevoegd aan de database
+	teamdao.AddTeam(team);
 } catch (Exception e) {
 	e.printStackTrace();
 }
-
+// Er wordt een html-page aangemaakt
+ 
  PrintWriter out = resp.getWriter();
  resp.setContentType("text.html");
  out.println("<!DOCTYPE html>");
@@ -48,7 +59,7 @@ public class DeleteLid extends HttpServlet {
  out.println("  <li><a href='lid1.html'>Lid toevoegen</a></li>");
  out.println("  <li><a href='lid2.html'>Lid Verwijderen</a></li>");
  out.println("</ul>");
- out.println(" <h1>Lid verwijderen gelukt!</h1>");
+ out.println(" <h1>Team toevoegen gelukt!</h1>");
  out.println("<form class='ann', action='inlog.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
  out.println(" </body>");

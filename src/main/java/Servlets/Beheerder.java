@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,20 +16,21 @@ import DAO.BeheerderDAOImpl;
 public class Beheerder extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-BeheerderDAOImpl behdao = new BeheerderDAOImpl();		
+BeheerderDAOImpl behdao = new BeheerderDAOImpl();
+//Gegevens van de html-page worden opgehaald
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
 
  try {
-
+//De gegevens worden gecontroleerd
 		ResultSet result = behdao.ControleerBeheerder(user, pasw);
 		while(result.next()){
 			if (result.getString("naam").equals(user)){
 				
 					
 			
-				
+//				Er wordt een html-page aangemaakt
 	 PrintWriter out = resp.getWriter();
 	 resp.setContentType("text.html");
 	 out.println("<!DOCTYPE html>");

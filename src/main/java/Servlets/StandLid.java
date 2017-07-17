@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,14 @@ public class StandLid extends HttpServlet {
 			 throws ServletException, IOException {
 					ProgrammaDAOImpl progdao = new ProgrammaDAOImpl();
 					
+//					Gegevens van html page worden opgehaald
+
 			 String id = req.getParameter("comp");
 			 int id1 = Integer.parseInt(id);
 
 
 			try {
+//				De stand wordt opgehaald uit de database
 				ResultSet result = progdao.Stand(id1);
 
 			 
@@ -43,6 +46,7 @@ public class StandLid extends HttpServlet {
  out.println(" <h1>De stand van competitie "+ id1 +"</h1>");
  out.println("<table BORDER=1 CELLPADDING=0 CELLSPACING=0 WIDTH=100%>"+"<tr> <th>Pl</th> <th>Team</th>  <th>GS</th> <th>WN</th> <th>GL</th> <th>VL</th> <th>DV</th><th>DT</th> <th>PN</th></tr>");
 int i = 0;
+//De tabel met de stand wordt hier aangemaakt
 while(result.next()){
 	i=i+1;
 out.println("<tr>"

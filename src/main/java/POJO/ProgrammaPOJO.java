@@ -25,6 +25,7 @@ public class ProgrammaPOJO {
 	public ProgrammaPOJO(){
 			
 	   }
+//	Constructor voor programma object
 	   public ProgrammaPOJO( int ronde,int thuis, int uit, int doelpuntenthuis,int doelpuntenuit, int competitie){
 	   	this.ronde = ronde;
 	   	this.thuis = thuis;

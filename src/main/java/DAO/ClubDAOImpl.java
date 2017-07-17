@@ -15,6 +15,7 @@ public class ClubDAOImpl implements ClubDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
+// Functie om connectie met de database te maken
     @Override
 	public Connection getConnection() throws SQLException {
 		Connection conn;
@@ -22,6 +23,7 @@ public class ClubDAOImpl implements ClubDAO {
 		return conn;
 	}
     
+// Funtie om in te loggen als club
 	@Override
 	public ResultSet ControleerClub(String user, String pasw) throws Exception{
 		ResultSet rs14 = null;

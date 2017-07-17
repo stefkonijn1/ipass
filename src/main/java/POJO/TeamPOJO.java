@@ -27,12 +27,14 @@ public class TeamPOJO {
 	public TeamPOJO(){
 			
 	   }
-	   public TeamPOJO(String teamnaam,int klasse){ 
-	   	this.teamnaam = teamnaam;
-	   	this.klasse = klasse;
-	   	
-	   }
-
+	
+//	Constructor voor team objecten
+   public TeamPOJO(String teamnaam,int klasse){ 
+   	this.teamnaam = teamnaam;
+   	this.klasse = klasse;
+   	
+   }
+//Getters en setters
 	public int getTeamcode() {
 		return teamcode;
 	}

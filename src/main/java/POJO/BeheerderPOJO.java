@@ -10,6 +10,7 @@ public class BeheerderPOJO {
 	   public BeheerderPOJO(){
 			
 	   }
+//	   De constructor om een beheerderobject aan te maken
 	   public BeheerderPOJO(int id, String naam, String Achternaam, int leeftijd, int clubid){
 	   	this.id = id;
 	   	this.naam = naam;
@@ -18,7 +19,7 @@ public class BeheerderPOJO {
 	   	this.clubid = clubid;
 	   }
 
-	   
+//	   De getters en setters
 	public int getId() {
 		return id;
 	}

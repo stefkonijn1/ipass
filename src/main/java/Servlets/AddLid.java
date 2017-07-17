@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,34 +10,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 import DAO.LidDAOImpl;
-import DAO.TeamDAOImpl;
 import POJO.LidPOJO;
-import POJO.TeamPOJO;
 
-@WebServlet(urlPatterns = "/AddTeam.java")
+@WebServlet(urlPatterns = "/AddLid.java")
 
-public class AddTeam extends HttpServlet {
+public class AddLid extends HttpServlet {
  protected void doGet(HttpServletRequest req, HttpServletResponse resp)
  throws ServletException, IOException {
-		TeamDAOImpl teamdao = new TeamDAOImpl();
-
+		LidDAOImpl liddao = new LidDAOImpl();
 		
- String naam = req.getParameter("team");
- String klasse = req.getParameter("klasse");
+//		De gegevens van de html-page worden opgehaald
+ String naam = req.getParameter("naam");
+ String achternaam = req.getParameter("achternaam");
+ String leeftijd = req.getParameter("leeftijd");
+ String pasw = req.getParameter("pasw");
+ String team = req.getParameter("team");
  
- int klasse1 = Integer.parseInt(klasse);
+ int team1 = Integer.parseInt(team);
+ int leeftijd1 = Integer.parseInt(leeftijd);
  
- TeamPOJO team = new TeamPOJO(naam, klasse1);
+// Er wordt een nieuw lid object aangemaakt
+ LidPOJO lid = new LidPOJO(naam, achternaam, leeftijd1, team1, pasw);
 
 
  
  
  try {
-	teamdao.AddTeam(team);
+	liddao.AddLid(lid);
 } catch (Exception e) {
 	e.printStackTrace();
 }
-
+// Er wordt een html-page geprint
  PrintWriter out = resp.getWriter();
  resp.setContentType("text.html");
  out.println("<!DOCTYPE html>");
@@ -56,7 +59,7 @@ public class AddTeam extends HttpServlet {
  out.println("  <li><a href='lid1.html'>Lid toevoegen</a></li>");
  out.println("  <li><a href='lid2.html'>Lid Verwijderen</a></li>");
  out.println("</ul>");
- out.println(" <h1>Team toevoegen gelukt!</h1>");
+ out.println(" <h1>Lid toevoegen gelukt!</h1>");
  out.println("<form class='ann', action='inlog.html'>");
  out.println("    <input type='submit' value='Ga terug' />");
  out.println(" </body>");

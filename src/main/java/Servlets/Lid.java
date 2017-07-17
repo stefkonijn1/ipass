@@ -1,4 +1,4 @@
-package nl.hu.v1ipass.test.servlets;
+package Servlets;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,11 +18,14 @@ public class Lid extends HttpServlet {
  throws ServletException, IOException {
 		LidDAOImpl liddao = new LidDAOImpl();
 		
+//		Gegevens van html page worden opgehaald
+
  String user = req.getParameter("user");
  String pasw = req.getParameter("pasw");
 
  
  try {
+//	 De gegevens worden gecontroleerd
 		ResultSet result = liddao.ControleerLid(user, pasw);
 		
 		while(result.next()){
@@ -37,7 +40,7 @@ public class Lid extends HttpServlet {
 			
 
 	 
-
+//Html page wordt aangemaakt
 	 PrintWriter out = resp.getWriter();
 	 resp.setContentType("text.html");
 	 out.println("<!DOCTYPE html>");

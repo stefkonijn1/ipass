@@ -10,14 +10,14 @@ import java.util.ArrayList;
 
 import POJO.ProgrammaPOJO;
 import POJO.TeamPOJO;
-import nl.hu.v1ipass.test.servlets.Programma;
+import Servlets.Programma;
 
 
 public class ProgrammaDAOImpl implements ProgrammaDAO {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    
+//    Connectie maken met de database
     @Override
 	public Connection getConnection() throws SQLException {
 		Connection conn;
@@ -25,6 +25,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return conn;
 	}
     
+//    Een programma object aanmaken voor een programma met een bepaald id uit de database
+    @Override
     public ProgrammaPOJO findProgrammaFromId(int id) throws SQLException {
 		String queryString = "SELECT * FROM programma WHERE wedstrijd_id = " + id;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
@@ -35,6 +37,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		System.out.println(prog);
 		return prog;
 		}
+    
+//    Er wordt een lijst met programma objecten aangemaakt door middel van een lijst met wedstrijd id's die worden omgezet naar volledige wedstrijden
     @Override
 	public ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException {
     	Connection connect = null;
@@ -53,6 +57,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return progArray;
 	}
 
+//    Er wordt een lijst gemaakt met de teams die in een bepaald programma zitten
     @Override
 	public ArrayList<String> getTeamsFromProgramma(int id) throws SQLException {
     	Connection connect = null;
@@ -66,6 +71,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		}
 		return ar;
 	}
+    
+//    Er wordt een lijst gemaakt met wedstrijd id's van een bepaald team
     @Override
 	public ArrayList<Integer> findProgrammaTeam(int i) throws SQLException {
     	Connection connect = null;
@@ -83,6 +90,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 
 	}
    
+//    Het programma wordt hier aangemaakt door middel van een speelronde en een competitie
     @Override
     public ResultSet Prog(int comp, int ronde) throws Exception {
          ResultSet rs2 = null;
@@ -106,6 +114,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return rs2;
 
     }
+    
+//    Functie om de stand te laten zien van een bepaalde competitie
     @Override
     public ResultSet Stand(int comp) throws Exception {
         ResultSet rs1 = null;
@@ -127,6 +137,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		return rs1;
 
     }
+    
+//    Funcite om de uitslag van een wedstrijd door te geven aan het programma
     @Override
     public void UitslagDoorgevenProg(ProgrammaPOJO prog) throws Exception {
         try {
@@ -153,6 +165,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         }
 
     }
+    
+//    Functie om het id van een westrijd op te vragen door middel van de thuisspelende ploeg en de speelronde
     @Override
     public int findIdFromNaam(int thuis, int ronde) throws SQLException {
     	int id = 90;
@@ -171,11 +185,14 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 
     
 	}
+    
+//    Functie om de uitslag van een wedstrijd te verwerken in de stand van de thuis spelende ploeg
     @Override
     public void UitslagDoorgevenTeamsThuis(ProgrammaPOJO prog) throws Exception {
         try {
         	Connection connect = null;
         	connect = getConnection();
+//        	Hier wordt de winnaar van de wedstrijd bepaald door te kijken wie er meer gescoord heeft
         	int winnaar = 0;
             if (prog.getDoelpuntenthuis()>prog.getDoelpuntenuit()){
             	winnaar = 1;
@@ -189,7 +206,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 TeamDAOImpl teamdao = new TeamDAOImpl();
 //thuis
 
-
+// Hier wordt het thuisteam aangemaakt als object
 TeamPOJO team = teamdao.findTeam(prog.getThuis());
 System.out.println(team.toString());
 System.out.println(team.getTeamcode());
@@ -206,7 +223,7 @@ int dpt = team.getDoelpuntentegen();
 preparedStatement = connect.prepareStatement("UPDATE TEAMS SET gespeelde_wedstrijden = ?, gewonnen = ?, gelijk = ?, verloren = ?, punten = ?, Doelpunten_V = ?, Doelpunten_T = ? WHERE teamcode = ? ");
 gespeeld = gespeeld + 1;
 preparedStatement.setInt(1, gespeeld);
-
+// Hier wordt berekend hoeveel punten de thuisploeg krijgt en wat er gebeurt met het doelsalde
 if (winnaar == 1){
         	gewonnen = gewonnen + 1;
         	punten = punten + 3;
@@ -252,11 +269,14 @@ if (winnaar == 1){
         }
 
     }
+    
+// Functie om de uitslag van de uitploeg te verwerken in de stans van de uitploeg
     @Override
     public void UitslagDoorgevenTeamsUit(ProgrammaPOJO prog) throws Exception {
         try {
         	Connection connect = null;
         	connect = getConnection();
+//        	Hier wordt de winnaar weer bepaald
             int winnaar = 0;
             if (prog.getDoelpuntenthuis()>prog.getDoelpuntenuit()){
             	winnaar = 1;
@@ -272,7 +292,7 @@ if (winnaar == 1){
             TeamDAOImpl teamdao = new TeamDAOImpl();
           //thuis
 
-
+// Hier wordt van het uitspelende team een object gemaakt
           TeamPOJO team = teamdao.findTeam(prog.getUit());
           System.out.println("tste");
           int gespeeld = team.getGespeeld();
@@ -287,7 +307,7 @@ if (winnaar == 1){
             preparedStatement = connect.prepareStatement("UPDATE TEAMS SET Gespeelde_wedstrijden = ?, gewonnen = ?, gelijk = ?, verloren = ?, punten = ?, Doelpunten_V = ?, Doelpunten_T = ? WHERE teamcode = ? ");
             gespeeld = gespeeld + 1;
 
-            
+//            Hier worden de punten berekend
             preparedStatement.setInt(1, gespeeld);
             if (winnaar == 1){
                     	verloren = verloren + 1;
@@ -343,25 +363,5 @@ if (winnaar == 1){
             throw e;
         } finally {
         }
-
     }
-	@Override
-	public ArrayList<ProgrammaPOJO> findProgramma(int i) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultSet findProgrammaCompetitie(int i) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResultSet Prog(ProgrammaPOJO prog) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }

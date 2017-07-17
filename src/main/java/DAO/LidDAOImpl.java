@@ -14,7 +14,7 @@ public class LidDAOImpl implements LidDAO {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
-    
+//    Connectie maken met database
     @Override
 	public Connection getConnection() throws SQLException {
 		Connection conn;
@@ -22,7 +22,7 @@ public class LidDAOImpl implements LidDAO {
 		return conn;
 	}
     
-    
+//    Een lid object aanmaken van een lid met een bepaald id uit de database
     @Override
 	public LidPOJO findLid(int id) throws SQLException {
     	Connection connect = null;
@@ -37,6 +37,8 @@ public class LidDAOImpl implements LidDAO {
 		
 		return lid;
     }
+    
+//    Een lid object aanmaken voor een lid met een bepaalde naam uit de database
     @Override
 	public LidPOJO findLidByName(String naam) throws SQLException {
     	Connection connect = null;
@@ -51,6 +53,8 @@ public class LidDAOImpl implements LidDAO {
 		
 		return lid;
     }
+    
+//    Lid object aanmaken voor een lid met een bepaald password uit de database
     @Override
    	public LidPOJO findLidByPasw(String pasw) throws SQLException {
     	Connection connect = null;
@@ -66,6 +70,7 @@ public class LidDAOImpl implements LidDAO {
    		return lid;
        }
 		
+//    Een lid toevoegen aan de database
 	@Override
 	public void AddLid(LidPOJO lid) throws Exception {
         try {
@@ -99,6 +104,8 @@ public class LidDAOImpl implements LidDAO {
             }        }
 
     }
+	
+//	Een lid verwijderen uit de database
 	@Override
 	public void DeleteLid(int id) throws Exception {
         try {
@@ -128,6 +135,8 @@ public class LidDAOImpl implements LidDAO {
 
     }
 	@Override
+	
+//	Een functie om in te loggen als lid
 	public ResultSet ControleerLid(String naam, String pasw) throws Exception{
 		ResultSet rs13 = null;
 		try {
@@ -149,18 +158,5 @@ public class LidDAOImpl implements LidDAO {
 
 	}
 
-	@Override
-	public void close() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void DeleteLid(LidPOJO lid) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 	
-
 }
