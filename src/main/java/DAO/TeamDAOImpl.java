@@ -28,11 +28,14 @@ public class TeamDAOImpl implements TeamDAO {
 //    Functie om een teamobject te maken voor een team met een bepaalde teamcode
     @Override
 	public TeamPOJO findTeam(int teamcode) throws SQLException {
+		TeamPOJO team = null;
+
+    	try{
     	Connection connect = null;
     	connect = getConnection();
 		String queryString = "SELECT * FROM teams WHERE teamcode = " + teamcode;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		TeamPOJO team = new TeamPOJO();
+		 team = new TeamPOJO();
 		while (res.next()) {
 			team = new TeamPOJO(res.getString("teamnaam"), res.getInt("klasse"));
 			team.setTeamcode(res.getInt("teamcode"));
@@ -55,10 +58,11 @@ public class TeamDAOImpl implements TeamDAO {
 			progArray.add(prog);
 		}
 		team.setProgramma(progArray);
-        connect.close();
-        statement.close();
-        preparedStatement.close();
-		
+    } catch (Exception e) {
+        throw e;
+    } finally {
+        close();
+    }
 		return team;
     }
     
@@ -66,6 +70,7 @@ public class TeamDAOImpl implements TeamDAO {
     @Override
     public int findIdFromNaam(int naam) throws SQLException {
     	int id = 90;
+    	try{
     	Connection connect = null;
     	connect = getConnection();
 		preparedStatement = connect.prepareStatement("SELECT teamcode from teams where teamnaam = ?");
@@ -75,8 +80,12 @@ public class TeamDAOImpl implements TeamDAO {
          id = (rs1.getInt("teamcode"));
         }
         connect.close();
-        statement.close();
-        preparedStatement.close();		return id;
+    	 } catch (Exception e) {
+    	        throw e;
+    	    } finally {
+    	        close();
+    	    }
+    	return id;
 	}
     
 //    Functie om een team toe te voegen
@@ -98,8 +107,9 @@ public class TeamDAOImpl implements TeamDAO {
 
         } catch (Exception e) {
             throw e;
-        } 
-
+        } finally {
+            close();
+        }
     }
 	
 //	Functie om een team te verwijderen
@@ -120,7 +130,9 @@ public class TeamDAOImpl implements TeamDAO {
 	        preparedStatement.close();
         } catch (Exception e) {
             throw e;
-        } 
+        } finally {
+            close();
+        }
 
     }
 	
@@ -149,9 +161,11 @@ public class TeamDAOImpl implements TeamDAO {
 	               return str;
 	        
 	        
-	    } catch (Exception e) {
-	        throw e;
-	    } 
+			 } catch (Exception e) {
+			        throw e;
+			    } finally {
+			        close();
+			    }
 
 	}
 	
@@ -182,8 +196,25 @@ public class TeamDAOImpl implements TeamDAO {
 	               return str;
 	        
 	        
-	    } catch (Exception e) {
-	        throw e;
-	    } 
+		 } catch (Exception e) {
+		        throw e;
+		    } finally {
+		        close();
+		    }
 	}
+	private void close() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            
+        } catch (Exception e) {
+
+        }
+    }
 }

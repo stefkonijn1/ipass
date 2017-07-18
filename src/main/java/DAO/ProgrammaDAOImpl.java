@@ -28,27 +28,34 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 //    Een programma object aanmaken voor een programma met een bepaald id uit de database
     @Override
     public ProgrammaPOJO findProgrammaFromId(int id) throws SQLException {
+    	ProgrammaPOJO prog = null;
+    	try{
     	Connection connect = null;
     	connect = getConnection();
 		String queryString = "SELECT * FROM programma WHERE wedstrijd_id = " + id;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		ProgrammaPOJO prog = new ProgrammaPOJO();
+		 prog = new ProgrammaPOJO();
 		while (res.next()) {
 			prog = new ProgrammaPOJO(res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
 		}
         connect.close();
-        statement.close();
-        preparedStatement.close();
+    	} catch (Exception e) {
+	        throw e;
+	    } finally {
+            close();
+        }
         return prog;
 		}
     
 //    Er wordt een lijst met programma objecten aangemaakt door middel van een lijst met wedstrijd id's die worden omgezet naar volledige wedstrijden
     @Override
 	public ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException {
+    	ArrayList<ProgrammaPOJO> progArray = null;
+    	try{
     	Connection connect = null;
     	connect = getConnection();
     	
-		ArrayList<ProgrammaPOJO> progArray = new ArrayList<ProgrammaPOJO>();
+		 progArray = new ArrayList<ProgrammaPOJO>();
 
     	for(int n : lijst){
     		String queryString = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE wedstrijd_id = "	+ n;
@@ -59,45 +66,60 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     		}
     	}
         connect.close();
-        statement.close();
-        preparedStatement.close();
+        } catch (Exception e) {
+	        throw e;
+	    } finally {
+            close();
+        }
 		return progArray;
 	}
 
 //    Er wordt een lijst gemaakt met de teams die in een bepaald programma zitten
     @Override
 	public ArrayList<String> getTeamsFromProgramma(int id) throws SQLException {
+		ArrayList<String> ar = null;
+
+    	try{
     	Connection connect = null;
     	connect = getConnection();
 		String queryString = "SELECT teams.teamnaam FROM teams, team_programma, programma WHERE team_programma.team = teams.teamcode AND programma.wedstrijd_id = "+id;
 				
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		ArrayList<String> ar = new ArrayList<String>();
+		 ar = new ArrayList<String>();
 		while (res.next()) {
 			ar.add(res.getString("teamnaam"));
 		}
         connect.close();
-        statement.close();
-        preparedStatement.close();
+    	 } catch (Exception e) {
+ 	        throw e;
+ 	    } finally {
+             close();
+         }
 		return ar;
 	}
     
 //    Er wordt een lijst gemaakt met wedstrijd id's van een bepaald team
     @Override
 	public ArrayList<Integer> findProgrammaTeam(int i) throws SQLException {
+		ArrayList<Integer> progArray = null;
+
+    	try{
     	Connection connect = null;
     	connect = getConnection();
 		String queryString = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, team WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND team.teamcode = team_programma.team AND team_programma.team = "	+ i;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		ArrayList<Integer> progArray = new ArrayList<Integer>();
+		 progArray = new ArrayList<Integer>();
 		while (res.next()) {
 			System.out.println(res.getInt("wedstrijd_id"));
 			progArray.add(res.getInt("wedstrijd_id"));
 
 		}
         connect.close();
-        statement.close();
-        preparedStatement.close();
+    	 } catch (Exception e) {
+  	        throw e;
+  	    } finally {
+              close();
+          }
 		return progArray;
 
 	}
@@ -122,8 +144,10 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 	        statement.close();
 	        preparedStatement.close();
         } catch (Exception e) {
-            throw e;
-        } 
+  	        throw e;
+  	    } finally {
+              close();
+          }
 		return rs2;
 
     }
@@ -146,8 +170,10 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 	        statement.close();
 	        preparedStatement.close();
         } catch (Exception e) {
-            throw e;
-        } 
+  	        throw e;
+  	    } finally {
+              close();
+          }
 		return rs1;
 
     }
@@ -169,17 +195,19 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         statement.close();
         preparedStatement.close();
         } catch (Exception e) {
-            throw e;
-        } finally {
-            
-        }
+  	        throw e;
+  	    } finally {
+              close();
+          }
 
     }
     
 //    Functie om het id van een westrijd op te vragen door middel van de thuisspelende ploeg en de speelronde
     @Override
-    public int findIdFromNaam(int thuis, int ronde) throws SQLException {
+    public int findIdFromNaam(int thuis, int ronde) throws SQLException { 
     	int id = 90;
+
+    	try{
     	Connection connect = null;
     	connect = getConnection();
 		preparedStatement = connect.prepareStatement("SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE thuisploeg = ? AND datum = ?");
@@ -190,8 +218,12 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
          id = (rs1.getInt("wedstrijd_id"));
         }
         connect.close();
-        statement.close();
-        preparedStatement.close();		return id;
+    	} catch (Exception e) {
+  	        throw e;
+  	    } finally {
+              close();
+          }
+        return id;
 		
 
     
@@ -271,13 +303,11 @@ if (winnaar == 1){
         
 
         connect.close();
-        statement.close();
-        preparedStatement.close();
-
         } catch (Exception e) {
-            throw e;
-        } finally {
-        }
+  	        throw e;
+  	    } finally {
+              close();
+          }
 
     }
     
@@ -367,11 +397,27 @@ if (winnaar == 1){
                     
 
         	        connect.close();
-        	        statement.close();
-        	        preparedStatement.close();
+        	        
 
         } catch (Exception e) {
-            throw e;
-        } 
+  	        throw e;
+  	    } finally {
+              close();
+          }
+    }
+    private void close() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            
+        } catch (Exception e) {
+
+        }
     }
 }

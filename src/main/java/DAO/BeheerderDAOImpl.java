@@ -44,9 +44,26 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 
 	    } catch (Exception e) {
 	        throw e;
-	    } 
+	    } finally {
+            close();
+        }
 		return rs;
 
 	}
+    
+    private void close() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
 
+            if (statement != null) {
+                statement.close();
+            }
+
+            
+        } catch (Exception e) {
+
+        }
+    }
 }

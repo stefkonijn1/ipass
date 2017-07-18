@@ -43,8 +43,25 @@ public class ClubDAOImpl implements ClubDAO {
 	        preparedStatement.close();	
 	    } catch (Exception e) {
 	        throw e;
-	    } 
+	    } finally {
+            close();
+        }
 		return rs14;
 	
 	}
+	private void close() {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+
+            
+        } catch (Exception e) {
+
+        }
+    }
 }
