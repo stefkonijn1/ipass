@@ -23,74 +23,51 @@ public class LidDAOImpl implements LidDAO {
 	}
     
 //    Een lid object aanmaken van een lid met een bepaald id uit de database
-	LidPOJO lid = null;
-
     @Override
 	public LidPOJO findLid(int id) throws SQLException {
-    
-    	try{
     	Connection connect = null;
     	connect = getConnection();
 		String queryString = "SELECT * FROM leden WHERE id = " + id;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		 lid = new LidPOJO();
+		LidPOJO lid = new LidPOJO();
 		while (res.next()) {
 			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
-			lid.setId(res.getInt("id"));}
-	        connect.close();}
-
-		 catch (Exception e) {
-	        throw e;
-	    } 
+			lid.setId(res.getInt("id"));
+		}
+		
 		return lid;
     }
     
 //    Een lid object aanmaken voor een lid met een bepaalde naam uit de database
-	LidPOJO lid1 = null;
-
     @Override
 	public LidPOJO findLidByName(String naam) throws SQLException {
-    
-    	try{
     	Connection connect = null;
     	connect = getConnection();
     	
 		String queryString = "SELECT * FROM leden WHERE naam = " + naam;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		 lid1 = new LidPOJO();
+		LidPOJO lid = new LidPOJO();
 		while (res.next()) {
-			lid1 = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
 		}
-			connect.close();
-
 		
-} catch (Exception e) {
-    throw e;
-} 
-		return lid1;
+		return lid;
     }
     
 //    Lid object aanmaken voor een lid met een bepaald password uit de database
-	LidPOJO lid2 = null;
-
     @Override
    	public LidPOJO findLidByPasw(String pasw) throws SQLException {
-    	try{
     	Connection connect = null;
     	connect = getConnection();
     	
    		String queryString = "SELECT * FROM leden WHERE password = " + pasw;
    		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-   		 lid2 = new LidPOJO();
+   		LidPOJO lid = new LidPOJO();
    		while (res.next()) {
-   			lid2 = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
-	        connect.close();
+   			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
    		}
-   		} catch (Exception e) {
-	        throw e;
-	    } 
    		
-   		return lid2;
+   		return lid;
        }
 		
 //    Een lid toevoegen aan de database
@@ -111,9 +88,9 @@ public class LidDAOImpl implements LidDAO {
 
 
           preparedStatement.executeUpdate();
-	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
+          System.out.println("Gelukt!");
+          connect.close();
+
 
         } catch (Exception e) {
             throw e;
@@ -140,17 +117,23 @@ public class LidDAOImpl implements LidDAO {
         preparedStatement.setInt(1, id);
 
           preparedStatement.executeUpdate();
-	        connect.close();
+          System.out.println("Gelukt!");
+          connect.close();
 
 
         } catch (Exception e) {
-	        throw e;
-	    } finally {
-            close();
-        }
-    }		
-	ResultSet rs13 = null;
+            throw e;
+        } finally {
+        	if (resultSet != null) {
+                resultSet.close();
+            }
 
+            if (statement != null) {
+                statement.close();
+            }
+        }
+
+    }
 	@Override
 	
 //	Een functie om in te loggen als lid
@@ -167,30 +150,13 @@ public class LidDAOImpl implements LidDAO {
 	        rs13  = preparedStatement.executeQuery();
 
 	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
-		} catch (Exception e) {
+
+	    } catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
 		return rs13;
 
 	}
-	private void close() {
-        try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
-            if (statement != null) {
-                statement.close();
-            }
-
-            
-        } catch (Exception e) {
-
-        }
-    }
 	
 }
