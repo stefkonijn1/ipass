@@ -12,7 +12,7 @@ public class BeheerderDAOImpl implements BeheerderDAO {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     
-// Functie om de connectie aan te maken
+// Functie om de connectie aan te maken test1
     @Override
 	public Connection getConnection() throws SQLException {
 		Connection conn;
@@ -21,10 +21,9 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 	}
     
 // Functie om in te loggen als beheerder
-	ResultSet rs = null; 
-
     @Override
 	public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
+		ResultSet rs = null; 
 
 		try {
 			
@@ -40,8 +39,6 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 	        rs  = preparedStatement.executeQuery();
 
 	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
 
 	    } catch (Exception e) {
 	        throw e;
@@ -49,20 +46,5 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 		return rs;
 
 	}
-    
-    private void close() {
-        try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
 
-            if (statement != null) {
-                statement.close();
-            }
-
-            
-        } catch (Exception e) {
-
-        }
-    }
 }
