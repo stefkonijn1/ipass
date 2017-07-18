@@ -145,18 +145,13 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         	Connection connect = null;
         	connect = getConnection();
         	
-            
-
-          preparedStatement = connect.prepareStatement("UPDATE PROGRAMMA SET Doelpunten_T = ?, Doelpunten_U = ? WHERE wedstrijd_id = ?;");
+        preparedStatement = connect.prepareStatement("UPDATE PROGRAMMA SET Doelpunten_T = ?, Doelpunten_U = ? WHERE wedstrijd_id = ?;");
         preparedStatement.setInt(1, prog.getDoelpuntenthuis());
         preparedStatement.setInt(2, prog.getDoelpuntenuit());
         preparedStatement.setInt(3, prog.getId());
-
         preparedStatement.executeUpdate();
-        
-
-
-          connect.close();
+   
+        connect.close();
 
         } catch (Exception e) {
             throw e;
