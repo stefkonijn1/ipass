@@ -28,6 +28,8 @@ public class TeamDAOImpl implements TeamDAO {
 //    Functie om een teamobject te maken voor een team met een bepaalde teamcode
     @Override
 	public TeamPOJO findTeam(int teamcode) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
 		String queryString = "SELECT * FROM teams WHERE teamcode = " + teamcode;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		TeamPOJO team = new TeamPOJO();
@@ -53,6 +55,9 @@ public class TeamDAOImpl implements TeamDAO {
 			progArray.add(prog);
 		}
 		team.setProgramma(progArray);
+        connect.close();
+        statement.close();
+        preparedStatement.close();
 		
 		return team;
     }
@@ -69,8 +74,9 @@ public class TeamDAOImpl implements TeamDAO {
         while(rs1.next()){
          id = (rs1.getInt("teamcode"));
         }
-        System.out.println(id);
-		return id;
+        connect.close();
+        statement.close();
+        preparedStatement.close();		return id;
 	}
     
 //    Functie om een team toe te voegen
@@ -86,21 +92,13 @@ public class TeamDAOImpl implements TeamDAO {
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
-          connect.close();
-
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 
         } catch (Exception e) {
             throw e;
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }
-
-        }
+        } 
 
     }
 	
@@ -116,20 +114,13 @@ public class TeamDAOImpl implements TeamDAO {
         preparedStatement.setInt(1, teamcode);
 
           preparedStatement.executeUpdate();
-          System.out.println("Gelukt!");
 
-          connect.close();
-
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
         } catch (Exception e) {
             throw e;
-        } finally {
-        	if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }        }
+        } 
 
     }
 	
@@ -152,6 +143,9 @@ public class TeamDAOImpl implements TeamDAO {
 	        while (rs3.next()) {
 	             str = rs3.getString("Teamnaam");
 	                      }
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 	               return str;
 	        
 	        
@@ -182,6 +176,9 @@ public class TeamDAOImpl implements TeamDAO {
 	        while (rs3.next()) {
 	             str = rs3.getString("Teamnaam");
 	                      }
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 	               return str;
 	        
 	        

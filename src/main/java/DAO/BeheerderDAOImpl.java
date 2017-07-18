@@ -39,6 +39,8 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 	        rs  = preparedStatement.executeQuery();
 
 	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 
 	    } catch (Exception e) {
 	        throw e;

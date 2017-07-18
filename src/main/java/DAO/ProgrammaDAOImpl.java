@@ -28,14 +28,18 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 //    Een programma object aanmaken voor een programma met een bepaald id uit de database
     @Override
     public ProgrammaPOJO findProgrammaFromId(int id) throws SQLException {
+    	Connection connect = null;
+    	connect = getConnection();
 		String queryString = "SELECT * FROM programma WHERE wedstrijd_id = " + id;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		ProgrammaPOJO prog = new ProgrammaPOJO();
 		while (res.next()) {
 			prog = new ProgrammaPOJO(res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
 		}
-		System.out.println(prog);
-		return prog;
+        connect.close();
+        statement.close();
+        preparedStatement.close();
+        return prog;
 		}
     
 //    Er wordt een lijst met programma objecten aangemaakt door middel van een lijst met wedstrijd id's die worden omgezet naar volledige wedstrijden
@@ -54,6 +58,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     			progArray.add(progpojo);
     		}
     	}
+        connect.close();
+        statement.close();
+        preparedStatement.close();
 		return progArray;
 	}
 
@@ -69,6 +76,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		while (res.next()) {
 			ar.add(res.getString("teamnaam"));
 		}
+        connect.close();
+        statement.close();
+        preparedStatement.close();
 		return ar;
 	}
     
@@ -85,7 +95,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 			progArray.add(res.getInt("wedstrijd_id"));
 
 		}
-
+        connect.close();
+        statement.close();
+        preparedStatement.close();
 		return progArray;
 
 	}
@@ -106,8 +118,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 
             rs2  = preparedStatement.executeQuery();
 
-            connect.close();
-
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
         } catch (Exception e) {
             throw e;
         } 
@@ -129,8 +142,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
             preparedStatement.setInt(1, comp);
             rs1  = preparedStatement.executeQuery();
 
-            connect.close();
-
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
         } catch (Exception e) {
             throw e;
         } 
@@ -152,7 +166,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         preparedStatement.executeUpdate();
    
         connect.close();
-
+        statement.close();
+        preparedStatement.close();
         } catch (Exception e) {
             throw e;
         } finally {
@@ -174,8 +189,9 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         while(rs1.next()){
          id = (rs1.getInt("wedstrijd_id"));
         }
-        System.out.println(id);
-		return id;
+        connect.close();
+        statement.close();
+        preparedStatement.close();		return id;
 		
 
     
@@ -254,9 +270,9 @@ if (winnaar == 1){
         preparedStatement.executeUpdate();
         
 
-          System.out.println("Gelukt!");
-          connect.close();
-
+        connect.close();
+        statement.close();
+        preparedStatement.close();
 
         } catch (Exception e) {
             throw e;
@@ -350,13 +366,12 @@ if (winnaar == 1){
                     preparedStatement.executeUpdate();
                     
 
-                      System.out.println("Gelukt!");
-                      connect.close();
-
+        	        connect.close();
+        	        statement.close();
+        	        preparedStatement.close();
 
         } catch (Exception e) {
             throw e;
-        } finally {
-        }
+        } 
     }
 }

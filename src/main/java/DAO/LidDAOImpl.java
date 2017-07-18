@@ -33,6 +33,9 @@ public class LidDAOImpl implements LidDAO {
 		while (res.next()) {
 			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
 			lid.setId(res.getInt("id"));
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 		}
 		
 		return lid;
@@ -49,6 +52,9 @@ public class LidDAOImpl implements LidDAO {
 		LidPOJO lid = new LidPOJO();
 		while (res.next()) {
 			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 		}
 		
 		return lid;
@@ -65,6 +71,9 @@ public class LidDAOImpl implements LidDAO {
    		LidPOJO lid = new LidPOJO();
    		while (res.next()) {
    			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
    		}
    		
    		return lid;
@@ -88,9 +97,9 @@ public class LidDAOImpl implements LidDAO {
 
 
           preparedStatement.executeUpdate();
-          System.out.println("Gelukt!");
-          connect.close();
-
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 
         } catch (Exception e) {
             throw e;
@@ -117,21 +126,13 @@ public class LidDAOImpl implements LidDAO {
         preparedStatement.setInt(1, id);
 
           preparedStatement.executeUpdate();
-          System.out.println("Gelukt!");
-          connect.close();
-
+	        connect.close();
+	        statement.close();
+	        preparedStatement.close();
 
         } catch (Exception e) {
             throw e;
-        } finally {
-        	if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }
-        }
+        } 
 
     }
 	@Override
@@ -150,7 +151,8 @@ public class LidDAOImpl implements LidDAO {
 	        rs13  = preparedStatement.executeQuery();
 
 	        connect.close();
-
+	        statement.close();
+	        preparedStatement.close();
 	    } catch (Exception e) {
 	        throw e;
 	    } 

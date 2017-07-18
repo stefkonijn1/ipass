@@ -39,7 +39,8 @@ public class ClubDAOImpl implements ClubDAO {
 	        rs14  = preparedStatement.executeQuery();
 	
 	        connect.close();
-	
+	        statement.close();
+	        preparedStatement.close();	
 	    } catch (Exception e) {
 	        throw e;
 	    } 
