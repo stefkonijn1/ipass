@@ -20,7 +20,7 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 		return conn;
 	}
     
-// Functie om in te loggen als beheerder
+// Functie om in te loggen als beheerder t
     @Override
 	public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
 		ResultSet rs = null; 
