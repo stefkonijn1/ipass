@@ -28,6 +28,8 @@ public class TeamDAOImpl implements TeamDAO {
 //    Functie om een teamobject te maken voor een team met een bepaalde teamcode
     @Override
 	public TeamPOJO findTeam(int teamcode) throws SQLException {
+    	Connection connect = getConnection();
+
 		String queryString = "SELECT * FROM teams WHERE teamcode = " + teamcode;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		TeamPOJO team = new TeamPOJO();
@@ -53,7 +55,7 @@ public class TeamDAOImpl implements TeamDAO {
 			progArray.add(prog);
 		}
 		team.setProgramma(progArray);
-		
+		connect.close();
 		return team;
     }
     
@@ -61,15 +63,14 @@ public class TeamDAOImpl implements TeamDAO {
     @Override
     public int findIdFromNaam(int naam) throws SQLException {
     	int id = 90;
-    	Connection connect = null;
-    	connect = getConnection();
+    	Connection connect = getConnection();
 		preparedStatement = connect.prepareStatement("SELECT teamcode from teams where teamnaam = ?");
 		preparedStatement.setInt(1, naam);
         ResultSet rs1  = preparedStatement.executeQuery();
         while(rs1.next()){
          id = (rs1.getInt("teamcode"));
         }
-        System.out.println(id);
+		connect.close();
 		return id;
 	}
     
@@ -77,8 +78,7 @@ public class TeamDAOImpl implements TeamDAO {
 	@Override
 	public void AddTeam(TeamPOJO team) throws Exception {
         try {
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
 
           preparedStatement = connect.prepareStatement("INSERT INTO TEAMS(teamnaam, klasse, gespeelde_wedstrijden,gewonnen,gelijk,verloren,punten, doelpunten_v, doelpunten_t, club_id) VALUES(?, ?, 0,0,0,0,0,0,0, 1)");
         preparedStatement.setString(1, team.getTeamnaam());
@@ -91,16 +91,7 @@ public class TeamDAOImpl implements TeamDAO {
 
         } catch (Exception e) {
             throw e;
-        } finally {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }
-
-        }
+        } 
 
     }
 	
@@ -108,8 +99,8 @@ public class TeamDAOImpl implements TeamDAO {
 	@Override
 	public void DeleteTeam(int teamcode) throws Exception {
         try {
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
+
             
 
           preparedStatement = connect.prepareStatement("DELETE FROM TEAMS WHERE TEAMCODE = ?;");
@@ -122,15 +113,7 @@ public class TeamDAOImpl implements TeamDAO {
 
         } catch (Exception e) {
             throw e;
-        } finally {
-        	if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }        }
-
+        } 
     }
 	
 //	Functie om de naam van het thuisteam op te halen door middel van het id 
@@ -140,18 +123,18 @@ public class TeamDAOImpl implements TeamDAO {
 
 			try {
 				 
-				Connection connect = null;
-		    	connect = getConnection(); 
+	        	Connection connect = getConnection();
+
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
 	        preparedStatement.setInt(1, thuis);
 	        rs3  = preparedStatement.executeQuery();
-	        connect.close();
 
 	        String str = "";
 	        while (rs3.next()) {
 	             str = rs3.getString("Teamnaam");
 	                      }
+	        connect.close();
 	               return str;
 	        
 	        
@@ -169,19 +152,19 @@ public class TeamDAOImpl implements TeamDAO {
 
 		try {
 			 
-			Connection connect = null;
-	    	connect = getConnection();
+        	Connection connect = getConnection();
+
 
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
 	        preparedStatement.setInt(1, uit);
 	        rs3  = preparedStatement.executeQuery();
-	        connect.close();
 
 	        String str = "";
 	        while (rs3.next()) {
 	             str = rs3.getString("Teamnaam");
 	                      }
+	        connect.close();
 	               return str;
 	        
 	        

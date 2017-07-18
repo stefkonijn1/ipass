@@ -29,8 +29,8 @@ public class ClubDAOImpl implements ClubDAO {
 		ResultSet rs14 = null;
 
 		try {
-			Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
+
             
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT Clubnaam FROM CLUBS WHERE Password = ?");

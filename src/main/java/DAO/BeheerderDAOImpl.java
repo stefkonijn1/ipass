@@ -27,8 +27,7 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 
 		try {
 			
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
         	
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT naam FROM beheerders WHERE password = ?");

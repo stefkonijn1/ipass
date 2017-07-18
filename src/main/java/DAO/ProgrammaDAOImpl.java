@@ -28,21 +28,23 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 //    Een programma object aanmaken voor een programma met een bepaald id uit de database
     @Override
     public ProgrammaPOJO findProgrammaFromId(int id) throws SQLException {
+    	Connection connect = getConnection();
+
 		String queryString = "SELECT * FROM programma WHERE wedstrijd_id = " + id;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		ProgrammaPOJO prog = new ProgrammaPOJO();
 		while (res.next()) {
 			prog = new ProgrammaPOJO(res.getInt("datum"),res.getInt("thuisploeg"),res.getInt("uitploeg"),res.getInt("doelpunten_t"),res.getInt("doelpunten_u"),res.getInt("competitie"));
 		}
-		System.out.println(prog);
-		return prog;
+connect.close();
+return prog;
 		}
     
 //    Er wordt een lijst met programma objecten aangemaakt door middel van een lijst met wedstrijd id's die worden omgezet naar volledige wedstrijden
     @Override
 	public ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException {
-    	Connection connect = null;
-    	connect = getConnection();
+    	Connection connect = getConnection();
+
     	
 		ArrayList<ProgrammaPOJO> progArray = new ArrayList<ProgrammaPOJO>();
 
@@ -54,14 +56,15 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     			progArray.add(progpojo);
     		}
     	}
+    	connect.close();
 		return progArray;
 	}
 
 //    Er wordt een lijst gemaakt met de teams die in een bepaald programma zitten
     @Override
 	public ArrayList<String> getTeamsFromProgramma(int id) throws SQLException {
-    	Connection connect = null;
-    	connect = getConnection();
+    	Connection connect = getConnection();
+
 		String queryString = "SELECT teams.teamnaam FROM teams, team_programma, programma WHERE team_programma.team = teams.teamcode AND programma.wedstrijd_id = "+id;
 				
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
@@ -69,14 +72,15 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 		while (res.next()) {
 			ar.add(res.getString("teamnaam"));
 		}
+		connect.close();
 		return ar;
 	}
     
 //    Er wordt een lijst gemaakt met wedstrijd id's van een bepaald team
     @Override
 	public ArrayList<Integer> findProgrammaTeam(int i) throws SQLException {
-    	Connection connect = null;
-    	connect = getConnection();
+    	Connection connect = getConnection();
+
 		String queryString = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, team WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND team.teamcode = team_programma.team AND team_programma.team = "	+ i;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
 		ArrayList<Integer> progArray = new ArrayList<Integer>();
@@ -85,7 +89,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 			progArray.add(res.getInt("wedstrijd_id"));
 
 		}
-
+		connect.close();
 		return progArray;
 
 	}
@@ -96,8 +100,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
          ResultSet rs2 = null;
 
         try {
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
+
         	
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement("SELECT Wedstrijd_id, datum, Thuisploeg, Uitploeg, Doelpunten_T, Doelpunten_U FROM PROGRAMMA WHERE competitie = ? AND Datum = ?;");
@@ -121,8 +125,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         ResultSet rs1 = null;
 
         try {
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
+
         	
             statement = connect.createStatement();
             preparedStatement = connect.prepareStatement("SELECT * FROM TEAMS WHERE klasse = ? ORDER BY punten DESC;");
@@ -142,9 +146,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     @Override
     public void UitslagDoorgevenProg(ProgrammaPOJO prog) throws Exception {
         try {
-        	Connection connect = null;
-        	connect = getConnection();
-        	
+        	Connection connect = getConnection();
+
             
 
           preparedStatement = connect.prepareStatement("UPDATE PROGRAMMA SET Doelpunten_T = ?, Doelpunten_U = ? WHERE wedstrijd_id = ?;");
@@ -170,8 +173,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     @Override
     public int findIdFromNaam(int thuis, int ronde) throws SQLException {
     	int id = 90;
-    	Connection connect = null;
-    	connect = getConnection();
+    	Connection connect = getConnection();
+
 		preparedStatement = connect.prepareStatement("SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma WHERE thuisploeg = ? AND datum = ?");
 		preparedStatement.setInt(1, thuis);
         preparedStatement.setInt(2, ronde);
@@ -179,8 +182,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         while(rs1.next()){
          id = (rs1.getInt("wedstrijd_id"));
         }
-        System.out.println(id);
-		return id;
+connect.close();
+return id;
 		
 
     
@@ -190,8 +193,8 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     @Override
     public void UitslagDoorgevenTeamsThuis(ProgrammaPOJO prog) throws Exception {
         try {
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
+
 //        	Hier wordt de winnaar van de wedstrijd bepaald door te kijken wie er meer gescoord heeft
         	int winnaar = 0;
             if (prog.getDoelpuntenthuis()>prog.getDoelpuntenuit()){
@@ -274,8 +277,8 @@ if (winnaar == 1){
     @Override
     public void UitslagDoorgevenTeamsUit(ProgrammaPOJO prog) throws Exception {
         try {
-        	Connection connect = null;
-        	connect = getConnection();
+        	Connection connect = getConnection();
+
 //        	Hier wordt de winnaar weer bepaald
             int winnaar = 0;
             if (prog.getDoelpuntenthuis()>prog.getDoelpuntenuit()){
