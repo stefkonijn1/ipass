@@ -26,9 +26,10 @@ public class TeamDAOImpl implements TeamDAO {
 	}
     
 //    Functie om een teamobject te maken voor een team met een bepaalde teamcode
+	TeamPOJO team = null;
+
     @Override
 	public TeamPOJO findTeam(int teamcode) throws SQLException {
-		TeamPOJO team = null;
 
     	try{
     	Connection connect = null;
@@ -60,16 +61,15 @@ public class TeamDAOImpl implements TeamDAO {
 		team.setProgramma(progArray);
     } catch (Exception e) {
         throw e;
-    } finally {
-        close();
-    }
+    } 
 		return team;
     }
     
 //    Functie om het id van een team te krijgen door middel van de naam
+	int id = 90;
+
     @Override
     public int findIdFromNaam(int naam) throws SQLException {
-    	int id = 90;
     	try{
     	Connection connect = null;
     	connect = getConnection();
@@ -82,9 +82,7 @@ public class TeamDAOImpl implements TeamDAO {
         connect.close();
     	 } catch (Exception e) {
     	        throw e;
-    	    } finally {
-    	        close();
-    	    }
+    	    } 
     	return id;
 	}
     
@@ -137,9 +135,10 @@ public class TeamDAOImpl implements TeamDAO {
     }
 	
 //	Functie om de naam van het thuisteam op te halen door middel van het id 
+	 ResultSet rs3 = null;
+
 	@Override
 	public String naamthuis(int thuis) throws Exception{
-		 ResultSet rs3 = null;
 
 			try {
 				 
@@ -163,17 +162,16 @@ public class TeamDAOImpl implements TeamDAO {
 	        
 			 } catch (Exception e) {
 			        throw e;
-			    } finally {
-			        close();
-			    }
+			    } 
 
 	}
 	
-//	Functie om de naam van het uitteam te halen door middel van hte id
+//	Functie om de naam van het uitteam te halen door middel van het id
+	 ResultSet rs4 = null;
+
 	@Override
 	public String naamuit(int uit) throws Exception{
 		
-		 ResultSet rs3 = null;
 
 		try {
 			 
@@ -183,24 +181,21 @@ public class TeamDAOImpl implements TeamDAO {
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
 	        preparedStatement.setInt(1, uit);
-	        rs3  = preparedStatement.executeQuery();
+	        rs4  = preparedStatement.executeQuery();
 	        connect.close();
 
 	        String str = "";
-	        while (rs3.next()) {
-	             str = rs3.getString("Teamnaam");
+	        while (rs4.next()) {
+	             str = rs4.getString("Teamnaam");
 	                      }
 	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
+
 	               return str;
 	        
 	        
 		 } catch (Exception e) {
 		        throw e;
-		    } finally {
-		        close();
-		    }
+		    } 
 	}
 	private void close() {
         try {

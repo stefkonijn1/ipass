@@ -21,9 +21,10 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 	}
     
 // Functie om in te loggen als beheerder
+	ResultSet rs = null; 
+
     @Override
 	public ResultSet ControleerBeheerder(String user, String pasw) throws Exception{
-		ResultSet rs = null; 
 
 		try {
 			
@@ -44,9 +45,7 @@ public class BeheerderDAOImpl implements BeheerderDAO {
 
 	    } catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
 		return rs;
 
 	}

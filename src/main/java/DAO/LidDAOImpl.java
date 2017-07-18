@@ -23,9 +23,10 @@ public class LidDAOImpl implements LidDAO {
 	}
     
 //    Een lid object aanmaken van een lid met een bepaald id uit de database
+	LidPOJO lid = null;
+
     @Override
 	public LidPOJO findLid(int id) throws SQLException {
-    	LidPOJO lid = null;
     
     	try{
     	Connection connect = null;
@@ -40,16 +41,15 @@ public class LidDAOImpl implements LidDAO {
 
 		 catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
 		return lid;
     }
     
 //    Een lid object aanmaken voor een lid met een bepaalde naam uit de database
+	LidPOJO lid1 = null;
+
     @Override
 	public LidPOJO findLidByName(String naam) throws SQLException {
-    	LidPOJO lid = null;
     
     	try{
     	Connection connect = null;
@@ -57,43 +57,40 @@ public class LidDAOImpl implements LidDAO {
     	
 		String queryString = "SELECT * FROM leden WHERE naam = " + naam;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		 lid = new LidPOJO();
+		 lid1 = new LidPOJO();
 		while (res.next()) {
-			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+			lid1 = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
 		}
 			connect.close();
 
 		
 } catch (Exception e) {
     throw e;
-} finally {
-    close();
-}
-		return lid;
+} 
+		return lid1;
     }
     
 //    Lid object aanmaken voor een lid met een bepaald password uit de database
+	LidPOJO lid2 = null;
+
     @Override
    	public LidPOJO findLidByPasw(String pasw) throws SQLException {
-    	LidPOJO lid = null;
     	try{
     	Connection connect = null;
     	connect = getConnection();
     	
    		String queryString = "SELECT * FROM leden WHERE password = " + pasw;
    		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-   		 lid = new LidPOJO();
+   		 lid2 = new LidPOJO();
    		while (res.next()) {
-   			lid = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
+   			lid2 = new LidPOJO(res.getString("naam"), res.getString("achternaam"), res.getInt("leeftijd"), res.getInt("teamcode"), res.getString("pasw"));
 	        connect.close();
    		}
    		} catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
    		
-   		return lid;
+   		return lid2;
        }
 		
 //    Een lid toevoegen aan de database
@@ -151,7 +148,9 @@ public class LidDAOImpl implements LidDAO {
 	    } finally {
             close();
         }
-    }
+    }		
+	ResultSet rs13 = null;
+
 	@Override
 	
 //	Een functie om in te loggen als lid

@@ -24,9 +24,10 @@ public class ClubDAOImpl implements ClubDAO {
 	}
     
 // Funtie om in te loggen als club
+	ResultSet rs14 = null;
+
 	@Override
 	public ResultSet ControleerClub(String user, String pasw) throws Exception{
-		ResultSet rs14 = null;
 
 		try {
 			Connection connect = null;
@@ -43,9 +44,7 @@ public class ClubDAOImpl implements ClubDAO {
 	        preparedStatement.close();	
 	    } catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
 		return rs14;
 	
 	}

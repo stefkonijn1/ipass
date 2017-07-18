@@ -26,9 +26,10 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
 	}
     
 //    Een programma object aanmaken voor een programma met een bepaald id uit de database
+	ProgrammaPOJO prog = null;
+
     @Override
     public ProgrammaPOJO findProgrammaFromId(int id) throws SQLException {
-    	ProgrammaPOJO prog = null;
     	try{
     	Connection connect = null;
     	connect = getConnection();
@@ -41,16 +42,15 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         connect.close();
     	} catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
         return prog;
 		}
     
 //    Er wordt een lijst met programma objecten aangemaakt door middel van een lijst met wedstrijd id's die worden omgezet naar volledige wedstrijden
+	ArrayList<ProgrammaPOJO> progArray = null;
+
     @Override
 	public ArrayList<ProgrammaPOJO> findProgramma(ArrayList<Integer> lijst) throws SQLException {
-    	ArrayList<ProgrammaPOJO> progArray = null;
     	try{
     	Connection connect = null;
     	connect = getConnection();
@@ -68,16 +68,15 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         connect.close();
         } catch (Exception e) {
 	        throw e;
-	    } finally {
-            close();
-        }
+	    } 
 		return progArray;
 	}
 
 //    Er wordt een lijst gemaakt met de teams die in een bepaald programma zitten
+	ArrayList<String> ar = null;
+
     @Override
 	public ArrayList<String> getTeamsFromProgramma(int id) throws SQLException {
-		ArrayList<String> ar = null;
 
     	try{
     	Connection connect = null;
@@ -92,42 +91,40 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         connect.close();
     	 } catch (Exception e) {
  	        throw e;
- 	    } finally {
-             close();
-         }
+ 	    } 
 		return ar;
 	}
     
 //    Er wordt een lijst gemaakt met wedstrijd id's van een bepaald team
+	ArrayList<Integer> progArray1 = null;
+
     @Override
 	public ArrayList<Integer> findProgrammaTeam(int i) throws SQLException {
-		ArrayList<Integer> progArray = null;
 
     	try{
     	Connection connect = null;
     	connect = getConnection();
 		String queryString = "SELECT programma.wedstrijd_id, programma.datum, programma.thuisploeg, programma.uitploeg, programma.doelpunten_t, programma.doelpunten_u, programma.competitie FROM programma, team_programma, team WHERE programma.wedstrijd_id = team_programma.wedstrijd_id AND team.teamcode = team_programma.team AND team_programma.team = "	+ i;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		 progArray = new ArrayList<Integer>();
+		 progArray1 = new ArrayList<Integer>();
 		while (res.next()) {
 			System.out.println(res.getInt("wedstrijd_id"));
-			progArray.add(res.getInt("wedstrijd_id"));
+			progArray1.add(res.getInt("wedstrijd_id"));
 
 		}
         connect.close();
     	 } catch (Exception e) {
   	        throw e;
-  	    } finally {
-              close();
-          }
-		return progArray;
+  	    } 
+		return progArray1;
 
 	}
    
 //    Het programma wordt hier aangemaakt door middel van een speelronde en een competitie
+    ResultSet rs2 = null;
+
     @Override
     public ResultSet Prog(int comp, int ronde) throws Exception {
-         ResultSet rs2 = null;
 
         try {
         	Connection connect = null;
@@ -141,21 +138,19 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
             rs2  = preparedStatement.executeQuery();
 
 	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
+	       
         } catch (Exception e) {
   	        throw e;
-  	    } finally {
-              close();
-          }
+  	    } 
 		return rs2;
 
     }
     
 //    Functie om de stand te laten zien van een bepaalde competitie
+    ResultSet rs1 = null;
+
     @Override
     public ResultSet Stand(int comp) throws Exception {
-        ResultSet rs1 = null;
 
         try {
         	Connection connect = null;
@@ -167,13 +162,10 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
             rs1  = preparedStatement.executeQuery();
 
 	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
+	       
         } catch (Exception e) {
   	        throw e;
-  	    } finally {
-              close();
-          }
+  	    } 
 		return rs1;
 
     }
@@ -203,9 +195,10 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
     }
     
 //    Functie om het id van een westrijd op te vragen door middel van de thuisspelende ploeg en de speelronde
+	int id = 90;
+
     @Override
     public int findIdFromNaam(int thuis, int ronde) throws SQLException { 
-    	int id = 90;
 
     	try{
     	Connection connect = null;
@@ -220,9 +213,7 @@ public class ProgrammaDAOImpl implements ProgrammaDAO {
         connect.close();
     	} catch (Exception e) {
   	        throw e;
-  	    } finally {
-              close();
-          }
+  	    } 
         return id;
 		
 
