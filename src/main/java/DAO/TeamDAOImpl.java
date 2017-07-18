@@ -26,17 +26,11 @@ public class TeamDAOImpl implements TeamDAO {
 	}
     
 //    Functie om een teamobject te maken voor een team met een bepaalde teamcode
-	TeamPOJO team = null;
-
     @Override
 	public TeamPOJO findTeam(int teamcode) throws SQLException {
-
-    	try{
-    	Connection connect = null;
-    	connect = getConnection();
 		String queryString = "SELECT * FROM teams WHERE teamcode = " + teamcode;
 		ResultSet res = getConnection().prepareStatement(queryString).executeQuery();
-		 team = new TeamPOJO();
+		TeamPOJO team = new TeamPOJO();
 		while (res.next()) {
 			team = new TeamPOJO(res.getString("teamnaam"), res.getInt("klasse"));
 			team.setTeamcode(res.getInt("teamcode"));
@@ -59,18 +53,14 @@ public class TeamDAOImpl implements TeamDAO {
 			progArray.add(prog);
 		}
 		team.setProgramma(progArray);
-    } catch (Exception e) {
-        throw e;
-    } 
+		
 		return team;
     }
     
 //    Functie om het id van een team te krijgen door middel van de naam
-	int id = 90;
-
     @Override
     public int findIdFromNaam(int naam) throws SQLException {
-    	try{
+    	int id = 90;
     	Connection connect = null;
     	connect = getConnection();
 		preparedStatement = connect.prepareStatement("SELECT teamcode from teams where teamnaam = ?");
@@ -79,11 +69,8 @@ public class TeamDAOImpl implements TeamDAO {
         while(rs1.next()){
          id = (rs1.getInt("teamcode"));
         }
-        connect.close();
-    	 } catch (Exception e) {
-    	        throw e;
-    	    } 
-    	return id;
+        System.out.println(id);
+		return id;
 	}
     
 //    Functie om een team toe te voegen
@@ -99,15 +86,22 @@ public class TeamDAOImpl implements TeamDAO {
 
           preparedStatement.executeUpdate();
           System.out.println("Gelukt!");
-	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
+          connect.close();
+
 
         } catch (Exception e) {
             throw e;
         } finally {
-            close();
+            if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+
         }
+
     }
 	
 //	Functie om een team te verwijderen
@@ -122,23 +116,27 @@ public class TeamDAOImpl implements TeamDAO {
         preparedStatement.setInt(1, teamcode);
 
           preparedStatement.executeUpdate();
+          System.out.println("Gelukt!");
 
-	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
+          connect.close();
+
         } catch (Exception e) {
             throw e;
         } finally {
-            close();
-        }
+        	if (resultSet != null) {
+                resultSet.close();
+            }
+
+            if (statement != null) {
+                statement.close();
+            }        }
 
     }
 	
 //	Functie om de naam van het thuisteam op te halen door middel van het id 
-	 ResultSet rs3 = null;
-
 	@Override
 	public String naamthuis(int thuis) throws Exception{
+		 ResultSet rs3 = null;
 
 			try {
 				 
@@ -154,24 +152,20 @@ public class TeamDAOImpl implements TeamDAO {
 	        while (rs3.next()) {
 	             str = rs3.getString("Teamnaam");
 	                      }
-	        connect.close();
-	        statement.close();
-	        preparedStatement.close();
 	               return str;
 	        
 	        
-			 } catch (Exception e) {
-			        throw e;
-			    } 
+	    } catch (Exception e) {
+	        throw e;
+	    } 
 
 	}
 	
-//	Functie om de naam van het uitteam te halen door middel van het id
-	 ResultSet rs4 = null;
-
+//	Functie om de naam van het uitteam te halen door middel van hte id
 	@Override
 	public String naamuit(int uit) throws Exception{
 		
+		 ResultSet rs3 = null;
 
 		try {
 			 
@@ -181,35 +175,18 @@ public class TeamDAOImpl implements TeamDAO {
 	        statement = connect.createStatement();
 	        preparedStatement = connect.prepareStatement("SELECT Teamnaam FROM Teams WHERE Teamcode = ?;");
 	        preparedStatement.setInt(1, uit);
-	        rs4  = preparedStatement.executeQuery();
+	        rs3  = preparedStatement.executeQuery();
 	        connect.close();
 
 	        String str = "";
-	        while (rs4.next()) {
-	             str = rs4.getString("Teamnaam");
+	        while (rs3.next()) {
+	             str = rs3.getString("Teamnaam");
 	                      }
-	        connect.close();
-
 	               return str;
 	        
 	        
-		 } catch (Exception e) {
-		        throw e;
-		    } 
+	    } catch (Exception e) {
+	        throw e;
+	    } 
 	}
-	private void close() {
-        try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
-
-            if (statement != null) {
-                statement.close();
-            }
-
-            
-        } catch (Exception e) {
-
-        }
-    }
 }
